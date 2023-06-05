@@ -174,11 +174,17 @@ def create_excel(df, xlfile):
                         worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
                         worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
                         worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
+                        try:
+                            worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
+                        except:
+                            worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent)
                         worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
                         worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
                         worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
+                        try:
+                            worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
+                        except:
+                            worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent)
                         row_write_val = row_write_val + 1
                     else:
                         if df['Nan_Var_Check'][i] == 0:
@@ -186,11 +192,17 @@ def create_excel(df, xlfile):
                             worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
                             worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
                             worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
-                            worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
+                            try:
+                                worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
+                            except:
+                                worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent)
                             worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
                             worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
                             worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
-                            worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
+                            try:
+                                worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
+                            except:
+                                worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent)
                             row_write_val = row_write_val + 1
                             if next_header_val == 1:
                                 new_row_needed = 1
@@ -232,11 +244,17 @@ def create_excel(df, xlfile):
                 worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_sub_item_num)
-                worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_sub_item_percent)
+                try:
+                    worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_sub_item_percent)
+                except:
+                    worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent)
                 worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_sub_item_num)
-                worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_sub_item_percent)
+                try:
+                    worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_sub_item_percent)
+                except:
+                    worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent)
                 row_write_val = row_write_val + 1
     worksheet.set_column(0,0,49.29)
     worksheet.set_column(9,9,49.29)
