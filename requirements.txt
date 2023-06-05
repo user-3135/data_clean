@@ -1,5 +1,4 @@
 xlsxwriter
 pandas
-math
 fpdf
 fpdf2
