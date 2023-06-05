@@ -1,7 +1,6 @@
 import pandas as pd
 import xlsxwriter as xl
 import math
-
 def create_excel(df, xlfile):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -33,7 +32,8 @@ def create_excel(df, xlfile):
                    ,'YTD Actual'
                    ,'YTD Budget'
                    ,'Variance'
-                   ,'% Var']
+                   ,'% Var'
+                   , 'Variance Explanations (5% and $2,500)']
     # clean data
     df=df.dropna(subset=['Col1']).reset_index(drop=True)
     def clean_text_col_1(text_val):
@@ -90,12 +90,12 @@ def create_excel(df, xlfile):
                                     , 'font_size':11
                                     , 'align':'center'
                                      })
-    for row in range(9):
+    for row in range(10):
         if row == 0:
             worksheet.write_blank(4, row, '', header_format_3)
         else:
             worksheet.write_string(4, row, header_cols[row - 1], header_format_3)
-    worksheet.merge_range(5, 0, 5, 8, '', header_format_2)
+    worksheet.merge_range(5, 0, 5, 9, '', header_format_2)
     worksheet.set_row(5,7.5)
     row_write_val = 6
     row_val_format_header = workbook.add_format({'font_color': black_color
@@ -134,7 +134,7 @@ def create_excel(df, xlfile):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -151,7 +151,6 @@ def create_excel(df, xlfile):
     #-------------------------------------------------------------------------
     for i in range(4, df.shape[0] - 1):
         if df['Header_Check'][i] == 1:
-            print(df['Col1'][i])
             try:
                 next_header_val = df['Header_Check'][i+1]
                 next_total_val = df['Total_Check'][i+1]
@@ -165,7 +164,7 @@ def create_excel(df, xlfile):
             if df['Col1'][i] in ['OPERATING INCOME', 'OPERATING EXPENSES', 'RECOVERABLE', 'NON-RECOVERABLE']:
                 worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
                 row_write_val = row_write_val + 1
-                worksheet.merge_range(row_write_val, 0, row_write_val, 8, '', header_format_2)
+                worksheet.merge_range(row_write_val, 0, row_write_val, 9, '', header_format_2)
                 worksheet.set_row(row_write_val,7.5)
                 row_write_val = row_write_val + 1
             else:
@@ -220,7 +219,7 @@ def create_excel(df, xlfile):
             # ------------------------------------------
             # add a row or not
             if new_row_needed == 1:
-                worksheet.merge_range(row_write_val, 0, row_write_val, 8, '', header_format_2)
+                worksheet.merge_range(row_write_val, 0, row_write_val, 9, '', header_format_2)
                 worksheet.set_row(row_write_val,7.5)
                 row_write_val = row_write_val + 1
             else:
@@ -239,6 +238,11 @@ def create_excel(df, xlfile):
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_sub_item_percent)
                 row_write_val = row_write_val + 1
-    worksheet.autofit()
-    worksheet.print_area(0,0, row_write_val - 1, 8)
+    worksheet.set_column(0,0,49.29)
+    worksheet.set_column(9,9,49.29)
+    worksheet.set_column(1,8,15)
+    worksheet.print_area(0,0, row_write_val - 1, 9)
+    worksheet.fit_to_pages(1, 1)
+    worksheet.set_landscape()
     workbook.close()
+    return prop_name
