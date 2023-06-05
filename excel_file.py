@@ -117,15 +117,15 @@ def create_excel(df, xlfile):
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
-                                    , 'num_format':'Accounting'
+                                    , 'align':'right'
+                                    , 'num_format':44
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'right'
                                     , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
                                      })
     row_val_format_total_item_num = workbook.add_format({'font_color': black_color
@@ -133,8 +133,8 @@ def create_excel(df, xlfile):
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
-                                    , 'num_format':'Accounting'
+                                    , 'align':'right'
+                                    , 'num_format':44
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -143,7 +143,7 @@ def create_excel(df, xlfile):
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'right'
                                     , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
                                     , 'top':1
                                     , 'border_color':black_color
@@ -151,6 +151,7 @@ def create_excel(df, xlfile):
     #-------------------------------------------------------------------------
     for i in range(4, df.shape[0] - 1):
         if df['Header_Check'][i] == 1:
+            print(df['Col1'][i])
             try:
                 next_header_val = df['Header_Check'][i+1]
                 next_total_val = df['Total_Check'][i+1]
@@ -181,20 +182,21 @@ def create_excel(df, xlfile):
                         worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
                         row_write_val = row_write_val + 1
                     else:
-                        worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
-                        worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
-                        worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
-                        row_write_val = row_write_val + 1
-                        if next_header_val == 1:
-                            new_row_needed = 1
-                        else:
-                            pass
+                        if df['Nan_Var_Check'][i] == 0:
+                            worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
+                            worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
+                            worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
+                            row_write_val = row_write_val + 1
+                            if next_header_val == 1:
+                                new_row_needed = 1
+                            else:
+                                pass
                 else:
                     if next_nan_val == 0:
                         worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
@@ -240,4 +242,3 @@ def create_excel(df, xlfile):
     worksheet.autofit()
     worksheet.print_area(0,0, row_write_val - 1, 8)
     workbook.close()
-    return df
