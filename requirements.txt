@@ -1,6 +1,5 @@
 xlsxwriter
 pandas
-datetime
 math
 fpdf
 fpdf2
