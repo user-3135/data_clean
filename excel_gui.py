@@ -6,19 +6,19 @@ st.header('Upload Budget Comp')
 uploaded_file = st.file_uploader("Choose a file")
 # income_statement_1
 st.header('Upload Income Statement')
-uploaded_file_income_statemnt_1 = st.file_uploader("Choose a file")
+uploaded_file_income_statemnt_1 = st.file_uploader("Upload the Income Statement")
 # bal_sheet_1
 st.header('Upload Balance Sheet')
-uploaded_file_balance_sheet = st.file_uploader("Choose a file")
+uploaded_file_balance_sheet = st.file_uploader("Upload the Balance Sheet")
 # cash_flow_1_df
 st.header('Upload Statement of Cashflow')
-uploaded_file_cash_flow = st.file_uploader("Choose a file")
+uploaded_file_cash_flow = st.file_uploader("Upload the Statement of Cashflow")
 # trail_balance_df
 st.header('Upload Trial Balance')
-uploaded_file_trial_balance = st.file_uploader("Choose a file")
+uploaded_file_trial_balance = st.file_uploader("Upload the Trial Balance")
 # payment_register_df
 st.header('Upload Payment Register')
-uploaded_file_payment_register = st.file_uploader("Choose a file")
+uploaded_file_payment_register = st.file_uploader("Upload teh Payment Register")
 try:
         dataframe_budget_comp = pd.read_excel(uploaded_file)
         dataframe_is = pd.read_excel(uploaded_file_income_statemnt_1)
