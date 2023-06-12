@@ -9,7 +9,7 @@ st.header('Upload Income Statement')
 uploaded_file_income_statemnt_1 = st.file_uploader("Upload the Income Statement")
 # bal_sheet_1
 st.header('Upload Balance Sheet')
-uploaded_file_balance_sheet = st.file_uploader("Upload the Balance Sheet")
+uploaded_file_balance_sheet = st.file_uploader("Upload the Balance Sheet Period Change")
 # cash_flow_1_df
 st.header('Upload Statement of Cashflow')
 uploaded_file_cash_flow = st.file_uploader("Upload the Statement of Cashflow")
