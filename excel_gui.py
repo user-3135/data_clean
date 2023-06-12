@@ -27,8 +27,8 @@ dataframe_tb = pd.read_excel(uploaded_file_trial_balance)
 dataframe_pr = pd.read_excel(uploaded_file_payment_register)
 try:
         output = BytesIO()
-        prop_name = excel_file.create_excel_2(dataframe_budget_comp, output, dataframe_is, dataframe_bs, dataframe_cf, dataframe_tb, dataframe_pr)
-        name = prop_name + 'Budget Comp.xlsx'
+        excel_file.create_excel_2(dataframe_budget_comp, output, dataframe_is, dataframe_bs, dataframe_cf, dataframe_tb, dataframe_pr)
+        name = 'Property Workbook Test.xlsx'
         st.download_button(
                 label="Download Excel workbook",
                 data=output.getvalue(),
