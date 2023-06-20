@@ -40,18 +40,17 @@ try:
 except:
     st.write('Ten Sched Error')
 # -------------------------------------
-try:
-    output = BytesIO()
-    excel_file_2.create_excel(actual_budget, 'test_clean.xlsx', is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched)
-    name = 'Property Workbook Test.xlsx'
-    st.download_button(
+output_2 = BytesIO()
+excel_file_2.create_excel(actual_budget, 'test_clean.xlsx', is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched)
+name = 'Property Workbook Test.xlsx'
+st.download_button(
                     label="Download Excel workbook",
-                    data=output.getvalue(),
+                    data=output_2.getvalue(),
                     file_name=name,
                     mime="application/vnd.ms-excel"
     )
-except:
-        pass
+#except:
+#        pass
 if data == 2:
         st.header('Upload Budget Comp')
         uploaded_file = st.file_uploader("Choose a file")
