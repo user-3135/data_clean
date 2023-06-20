@@ -43,7 +43,7 @@ except:
 # -------------------------------------
 try:
     output_2 = BytesIO()
-    excel_file_2.create_excel(actual_budget, 'test_clean.xlsx', is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched)
+    excel_file_2.create_excel(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched)
     name = 'Property Workbook Test.xlsx'
     st.download_button(
                         label="Download Excel workbook",
