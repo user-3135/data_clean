@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from io import BytesIO
 import excel_file
+import excel_file_2
 data = 1
 st.header('import file')
 uploaded_file_2 = st.file_uploader("Upload a Single File")
