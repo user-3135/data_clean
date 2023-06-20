@@ -4,36 +4,39 @@ from io import BytesIO
 import excel_file
 data = 1
 st.header('import file')
-uploaded_file = st.file_uploader("Choose a file")
+uploaded_file_2 = st.file_uploader("Upload a Single File")
 
 # data read
-tb_df = pd.read_excel(uploaded_file, sheet_name = 'TB') #BS
 try:
-    cash_flow_df = pd.read_excel(uploaded_file, sheet_name = 'CashFlow') #BS
+    tb_df = pd.read_excel(uploaded_file_2, sheet_name = 'TB') #BS
+except:
+    pass
+try:
+    cash_flow_df = pd.read_excel(uploaded_file_2, sheet_name = 'CashFlow') #BS
 except:
     st.write('Cash Flow Error')
 try:
-    bs_df = pd.read_excel(uploaded_file, sheet_name = 'BS') #BS
+    bs_df = pd.read_excel(uploaded_file_2, sheet_name = 'BS') #BS
 except:
     st.write('Balance Sheet Error')
 try:
-    is_df = pd.read_excel(uploaded_file, sheet_name = 'IS') #BS
+    is_df = pd.read_excel(uploaded_file_2, sheet_name = 'IS') #BS
 except:
     st.write('Income Statement Error')
 try:
-    actual_budget = pd.read_excel(uploaded_file, sheet_name = 'Actual-Budget')
+    actual_budget = pd.read_excel(uploaded_file_2, sheet_name = 'Actual-Budget')
 except:
     st.write('Actual - Budget Error')
 try:
-    data_ar_detail = pd.read_excel(uploaded_file, sheet_name = 'AR Detail')
+    data_ar_detail = pd.read_excel(uploaded_file_2, sheet_name = 'AR Detail')
 except:
     st.write('AR Detail Error')
 try:
-    data_12_month = pd.read_excel(uploaded_file, sheet_name = 'IS 12 Month Actual')
+    data_12_month = pd.read_excel(uploaded_file_2, sheet_name = 'IS 12 Month Actual')
 except:
     st.write('IS 12 Month Actual')
 try:    
-    data_ten_sched = pd.read_excel(uploaded_file, sheet_name = 'TenSched1')
+    data_ten_sched = pd.read_excel(uploaded_file_2, sheet_name = 'TenSched1')
 except:
     st.write('Ten Sched Error')
 # -------------------------------------
