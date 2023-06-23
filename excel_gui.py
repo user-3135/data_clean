@@ -3,6 +3,7 @@ import pandas as pd
 from io import BytesIO
 import excel_file
 import excel_file_2
+import excel_file_3
 data = 1
 st.header('import file')
 uploaded_file_2 = st.file_uploader("Upload a Single File")
@@ -40,10 +41,28 @@ try:
     data_ten_sched = pd.read_excel(uploaded_file_2, sheet_name = 'TenSched1')
 except:
     st.write('Ten Sched Error')
+# ------------------------------------
+try:
+    data_payment_register = pd.read_excel(uploaded_file_2, sheet_name = 'Pymnt Register')
+except:
+    st.write('Pymnt Register Error')
+try:
+    data_ap_detail = pd.read_excel(uploaded_file_2, sheet_name = 'AP Detail')
+except:
+    st.write('AP Detail Error')
+try:
+    data_mth_gl = pd.read_excel(uploaded_file_2, sheet_name = 'MTH GL')
+except:
+    st.write('MTH GL Error')
+try:    
+    je_register_data = pd.read_excel(uploaded_file_2, sheet_name = 'JE Register')
+except:
+    st.write('JE Register Error')
 # -------------------------------------
 try:
     output_2 = BytesIO()
-    excel_file_2.create_excel(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched)
+    excel_file_3.create_excel_v3(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched
+                                , je_register_data, data_mth_gl,data_ap_detail, data_payment_register)
     name = 'Property Workbook Test.xlsx'
     st.download_button(
                         label="Download Excel workbook",
