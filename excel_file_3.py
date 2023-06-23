@@ -3864,12 +3864,12 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
             ,[42.3,0,0, worksheet_12_mo_actual]
             ,[11.9,1,16, worksheet_12_mo_actual]
             ,[58.8, 0, 0, BS_Change_Sheet]
-            ,[17.9, 1, 4, BS_Change_Sheet]
+            ,[17.9, 1, 3, BS_Change_Sheet]
             ,[71, 0, 0, Cash_Flow_1 ] ## cashflow
-            ,[17.7, 1, 3, Cash_Flow_1] ## cashflow
+            ,[17.7, 1, 2, Cash_Flow_1] ## cashflow
             ,[38.7, 0, 0, Trial_Balance] ## Trial Balance
-            ,[16.4, 1, 5, Trial_Balance] ## Trial Balance
-            ,[12.7, 0, 17, worksheet_tenancy_sched] ## Tenancy Schedule
+            ,[16.4, 1, 4, Trial_Balance] ## Trial Balance
+            ,[12.7, 0, 16, worksheet_tenancy_sched] ## Tenancy Schedule
             ,[10, 0, 0, aging_detail_sheet] ## AR Detail
             ,[9.8, 1, 1, aging_detail_sheet] ## AR Detail
             ,[42.2, 2, 2, aging_detail_sheet] ## AR Detail
@@ -3878,7 +3878,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
             ,[8.8, 5, 5, aging_detail_sheet] ## AR Detail
             ,[10.3, 6, 6, aging_detail_sheet] ## AR Detail
             ,[10.3, 7, 7, aging_detail_sheet] ## AR Detail
-            ,[12, 8, 15, aging_detail_sheet] ## AR Detail
+            ,[12, 8, 14, aging_detail_sheet] ## AR Detail
             ,[14.4, 0, 0, worksheet_pay_reg] ## Payment Register
             ,[6.4, 1, 1, worksheet_pay_reg] ## Payment Register
             ,[9.5, 2, 2, worksheet_pay_reg] ## Payment Register
@@ -3890,7 +3890,9 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
             ,[7.5, 8, 8, worksheet_pay_reg] ## Payment Register
             ,[8.2, 9, 9, worksheet_pay_reg] ## Payment Register
             ,[10, 10, 10, worksheet_pay_reg ] ## Payment Register
-            ,[16, 11, 12, worksheet_pay_reg] ## Payment Register
+            ,[16, 11, 11, worksheet_pay_reg] ## Payment Register
+            ,[10, 12, 12, worksheet_pay_reg] ## Payment Register
+            ,[47.3, 13, 13, worksheet_pay_reg] ## Payment Register
             ,[13.8, 0, 0, ap_detail_sheet] ## AP Detail
             ,[12.2, 1, 0, ap_detail_sheet] ## AP Detail
             ,[25.2, 2, 0, ap_detail_sheet] ## AP Detail
@@ -3903,13 +3905,13 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
             ,[10.3, 9, 14, ap_detail_sheet] ## AP Detail
             ,[27.4, 15, 15, ap_detail_sheet] ## AP Detail
             ,[9.8, 0, 0, je_register_worksheet] ## JE Register
-            ,[10.2, 1, 4, je_register_worksheet] ## JE Register
-            ,[9.5, 5, 5, je_register_worksheet] ## JE Register
-            ,[12.8, 6, 6, je_register_worksheet] ## JE Register
-            ,[42.2, 7, 7, je_register_worksheet] ## JE Register
-            ,[16, 8, 8, je_register_worksheet] ## JE Register
-            ,[10, 9, 9, je_register_worksheet] ## JE Register
-            ,[12.5, 10, 11, je_register_worksheet] ## JE Register
+            ,[10.2, 1, 3, je_register_worksheet] ## JE Register
+            ,[9.5, 4, 4, je_register_worksheet] ## JE Register
+            ,[12.8, 5, 5, je_register_worksheet] ## JE Register
+            ,[42.2, 6, 6, je_register_worksheet] ## JE Register
+            ,[16, 7, 7, je_register_worksheet] ## JE Register
+            ,[10, 8, 8, je_register_worksheet] ## JE Register
+            ,[12.5, 9, 10, je_register_worksheet] ## JE Register
             ,[6.3, 12, 12, je_register_worksheet] ## JE Register
             ,[37.5, 13, 13, je_register_worksheet] ## JE Register
             # ,[11.5, 0, 0, ] ## General Ledger
