@@ -3838,4 +3838,24 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
         d = payment_register_sheet(workbook, data_payment_register, worksheet_pay_reg)
     except:
         pass
+    
+    column_width_list = [
+            [11.5, 0, 0, mnth_gl_worksheet]
+            ,[16, 1, 1, mnth_gl_worksheet]
+            ,[10.8, 2, 2, mnth_gl_worksheet]
+            ,[11.3, 3, 3, mnth_gl_worksheet]
+            ,[39.6, 4, 4, mnth_gl_worksheet]
+            ,[9.3, 5, 5, mnth_gl_worksheet]
+            ,[23.3, 6, 6, mnth_gl_worksheet]
+            ,[11.4, 7, 8, mnth_gl_worksheet]
+            ,[14.4, 9, 9, mnth_gl_worksheet]
+            ,[50.7, 10, 10, mnth_gl_worksheet]
+            ,[71, 0, 0, income_statement_1]
+            ,[17.7, 2, 0, income_statement_1]
+    ]
+    for i in column_width_list:
+        try:
+            i[3].set_column(i[1],i[2], i[0], mnth_gl_sheet)
+        except:
+            pass
     workbook.close()
