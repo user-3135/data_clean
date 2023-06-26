@@ -4,7 +4,7 @@ from io import BytesIO
 import excel_file
 import excel_file_2
 import excel_file_3
-import excel_file_4
+import excel_file_4 as writer
 import comb
 import xlsxwriter as xl
 data = 1
