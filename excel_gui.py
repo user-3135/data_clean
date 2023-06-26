@@ -62,7 +62,7 @@ except:
     st.write('JE Register Error')
 output_4 = BytesIO()
 try:
-    workbook_not_func = xl.Workbook(output)
+    workbook_not_func = xl.Workbook(output_4)
     #----------------------------------------------------------------------------------- 1
     je_register_worksheet = workbook_not_func.add_worksheet('JE Register')
     mnth_gl_worksheet = workbook_not_func.add_worksheet('Mnth GL')
