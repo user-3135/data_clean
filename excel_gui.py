@@ -9,7 +9,6 @@ import comb
 data = 1
 st.header('import file')
 uploaded_file_2 = st.file_uploader("Upload a Single File")
-
 # data read
 try:
     tb_df_1 = pd.read_excel(uploaded_file_2, sheet_name = 'TB') #BS
@@ -240,7 +239,7 @@ try:
     
     wb_base.save(final_output)
 except:
-    pass
+    st.write('combine fail')
 # -------------------------------------
 try:
     try:
