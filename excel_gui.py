@@ -250,16 +250,24 @@ try:
                             mime="application/vnd.ms-excel"
         )
     except:
-        output_2 = BytesIO()
-        excel_file_3.create_excel_v3(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df_1 , data_ar_detail, data_12_month, data_ten_sched
-                                    , je_register_data, data_mth_gl,data_ap_detail, data_payment_register)
-        name = 'Property Workbook Test.xlsx'
-        st.download_button(
-                            label="Download Excel workbook",
-                            data=output_2.getvalue(),
-                            file_name=name,
-                            mime="application/vnd.ms-excel"
-        )
+        try:
+            st.download_button(
+                                label="Download Excel Workbook",
+                                data=output_4.getvalue(),
+                                file_name=name,
+                                mime="application/vnd.ms-excel"
+            )
+        except:
+            output_2 = BytesIO()
+            excel_file_3.create_excel_v3(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df_1 , data_ar_detail, data_12_month, data_ten_sched
+                                        , je_register_data, data_mth_gl,data_ap_detail, data_payment_register)
+            name = 'Property Workbook Test.xlsx'
+            st.download_button(
+                                label="Download Excel workbook",
+                                data=output_2.getvalue(),
+                                file_name=name,
+                                mime="application/vnd.ms-excel"
+            )
 except:
         pass
 if data == 2:
