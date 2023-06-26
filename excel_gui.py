@@ -213,7 +213,7 @@ try:
             pass
     workbook_not_func.close()
 except: 
-    pass
+    st.write('error in base')
 try:
     wb_base = openpyxl.load_workbook(output_4)
     vals_to_rip = ['Summary'
@@ -238,8 +238,7 @@ try:
             print(i)
     
     wb_base.save(final_output)
-except:
-    st.write('combine fail')
+except Exception as e: print(e)
 # -------------------------------------
 try:
     try:
