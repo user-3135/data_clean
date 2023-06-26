@@ -14,7 +14,7 @@ uploaded_file_2 = st.file_uploader("Upload a Single File")
 try:
     tb_df_1 = pd.read_excel(uploaded_file_2, sheet_name = 'TB') #BS
 except:
-    pass
+    st.write('Trial Balance Error')
 try:
     cash_flow_df = pd.read_excel(uploaded_file_2, sheet_name = 'CashFlow') #BS
 except:
@@ -241,20 +241,27 @@ try:
     wb_base.save(final_output)
 except:
     pass
-
-
 # -------------------------------------
 try:
-    output_2 = BytesIO()
-    excel_file_3.create_excel_v3(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched
-                                , je_register_data, data_mth_gl,data_ap_detail, data_payment_register)
-    name = 'Property Workbook Test.xlsx'
-    st.download_button(
-                        label="Download Excel workbook",
-                        data=output_2.getvalue(),
-                        file_name=name,
-                        mime="application/vnd.ms-excel"
-    )
+    try:
+        name = 'Combined Property Workbook Test.xlsx'
+        st.download_button(
+                            label="Download Excel Combined Workbook",
+                            data=final_output.getvalue(),
+                            file_name=name,
+                            mime="application/vnd.ms-excel"
+        )
+    except:
+        output_2 = BytesIO()
+        excel_file_3.create_excel_v3(actual_budget, output_2, is_df, bs_df, cash_flow_df, tb_df, data_ar_detail, data_12_month, data_ten_sched
+                                    , je_register_data, data_mth_gl,data_ap_detail, data_payment_register)
+        name = 'Property Workbook Test.xlsx'
+        st.download_button(
+                            label="Download Excel workbook",
+                            data=output_2.getvalue(),
+                            file_name=name,
+                            mime="application/vnd.ms-excel"
+        )
 except:
         pass
 if data == 2:
