@@ -6,6 +6,7 @@ import excel_file_2
 import excel_file_3
 import excel_file_4
 import comb
+import xlsxwriter as xl
 data = 1
 st.header('import file')
 uploaded_file_2 = st.file_uploader("Upload a Single File")
@@ -60,8 +61,8 @@ try:
 except:
     st.write('JE Register Error')
 output_4 = BytesIO()
-workbook_not_func = xl.Workbook(output_4)
 try:
+    workbook_not_func = xl.Workbook(output_4)
     #----------------------------------------------------------------------------------- 1
     je_register_worksheet = workbook_not_func.add_worksheet('JE Register')
     mnth_gl_worksheet = workbook_not_func.add_worksheet('Mnth GL')
@@ -211,9 +212,10 @@ try:
             i[3].set_column(i[1],i[2], i[0])
         except:
             pass
+    
+    workbook_not_func.close()
 except: 
     st.write('error in base')
-workbook_not_func.close()
 try:
     wb_base = openpyxl.load_workbook(output_4)
     vals_to_rip = ['Summary'
