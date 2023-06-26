@@ -216,9 +216,9 @@ try:
     workbook_not_func.close()
 except: 
     st.write('error in base')
-try:
-    wb_base = openpyxl.load_workbook(output_4)
-    vals_to_rip = ['Summary'
+
+wb_base = openpyxl.load_workbook(output_4)
+vals_to_rip = ['Summary'
                , 'FS Checklist'
                , 'Financial Summary Chart'
                , 'Rent Roll'
@@ -229,18 +229,17 @@ try:
                , 'Mortgage Statement'
                , 'Bank Recon'
               ]
-    wb_add = openpyxl.load_workbook(uploaded_file_2)
-    final_output = BytesIO()
-    for i in vals_to_rip:    
-        target_sheet = wb_base.create_sheet(i)
-        try:
-            source_sheet = wb_add[i]
-            comb.copy_sheet(source_sheet, target_sheet)
-        except:
-            print(i)
+wb_add = openpyxl.load_workbook(uploaded_file_2)
+final_output = BytesIO()
+for i in vals_to_rip:    
+    target_sheet = wb_base.create_sheet(i)
+    try:
+        source_sheet = wb_add[i]
+        comb.copy_sheet(source_sheet, target_sheet)
+    except:
+        print(i)
     
-    wb_base.save(final_output)
-except Exception as e: print(e)
+wb_base.save(final_output)
 # -------------------------------------
 try:
     try:
