@@ -643,9 +643,9 @@ def budget_comp_sheet_creation(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
+                                    , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
@@ -933,7 +933,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                      })
     row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
+                                    , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
@@ -1270,14 +1270,14 @@ def create_xl_tb(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
+                                    , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item_2 = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item_2 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
