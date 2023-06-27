@@ -1932,7 +1932,7 @@ def twelve_month_actual_budget(workbook, df, worksheet):
                                      })
     row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
+                                    , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
