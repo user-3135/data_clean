@@ -4943,7 +4943,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':''_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_header_format_5 = workbook.add_format({'font_color': black_color
