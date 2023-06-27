@@ -179,7 +179,7 @@ def income_statement(workbook, income_statement_1, Income_Statement):
                                      })
     row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
+                                    , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
@@ -196,7 +196,7 @@ def income_statement(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
@@ -399,7 +399,6 @@ def create_xl_balance_sheet(workbook, bal_sheet_1, BS_Change_Sheet):
                                      })
     row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
-                                    , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
@@ -416,7 +415,7 @@ def create_xl_balance_sheet(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
