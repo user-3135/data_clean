@@ -177,14 +177,14 @@ def income_statement(workbook, income_statement_1, Income_Statement):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item_2 = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item_2 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -212,7 +212,7 @@ def income_statement(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -377,7 +377,7 @@ def create_xl_balance_sheet(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_size':14
                                     , 'align':'left'
                                      })
-    header_format_2 = workbook.add_format({'font_color': dark_gray_color
+    header_format_2 = workbook.add_format({'font_color': black_color
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -397,13 +397,13 @@ def create_xl_balance_sheet(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item_2 = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item_2 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -431,7 +431,7 @@ def create_xl_balance_sheet(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -650,7 +650,7 @@ def budget_comp_sheet_creation(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item_2 = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item_2 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -662,7 +662,7 @@ def budget_comp_sheet_creation(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -678,7 +678,7 @@ def budget_comp_sheet_creation(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -931,14 +931,14 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
-    row_val_format_sub_item_2 = workbook.add_format({'font_color': dark_gray_color
+    row_val_format_sub_item_2 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -950,7 +950,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -966,7 +966,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1092,7 +1092,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                     })
@@ -1102,7 +1102,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1112,7 +1112,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -1121,14 +1121,14 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_header_format_5 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_bottom_format_6 = workbook.add_format({'font_color': black_color
@@ -1146,7 +1146,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -1157,7 +1157,7 @@ def create_xl_cf(workbook, cash_flow_1_df, Cash_Flow_1):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1289,7 +1289,7 @@ def create_xl_tb(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1305,7 +1305,7 @@ def create_xl_tb(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1943,7 +1943,7 @@ def twelve_month_actual_budget(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1959,7 +1959,7 @@ def twelve_month_actual_budget(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1988,7 +1988,7 @@ def twelve_month_actual_budget(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -2272,7 +2272,7 @@ def aging_detail(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2301,7 +2301,7 @@ def aging_detail(workbook, df, worksheet):
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44})
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'})
     total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -2311,7 +2311,7 @@ def aging_detail(workbook, df, worksheet):
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2323,7 +2323,7 @@ def aging_detail(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2336,7 +2336,7 @@ def aging_detail(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     
     for i in range(3, df.shape[0]):
@@ -2628,7 +2628,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
@@ -2644,7 +2644,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -3072,7 +3072,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                     })
@@ -3082,7 +3082,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -3092,7 +3092,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -3101,14 +3101,14 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_header_format_5 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_bottom_format_6 = workbook.add_format({'font_color': black_color
@@ -3126,7 +3126,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -3137,7 +3137,7 @@ def create_excel(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df, tr
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -3587,13 +3587,13 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                         })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3639,7 +3639,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -3652,7 +3652,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -3867,13 +3867,13 @@ def ap_detail_sheet_def(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                         })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3912,7 +3912,7 @@ def ap_detail_sheet_def(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -3925,7 +3925,7 @@ def ap_detail_sheet_def(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -4470,7 +4470,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': dark_gray_color
                                     #, 'bg_color':black_color
@@ -4486,7 +4486,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -4914,7 +4914,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                     })
@@ -4924,7 +4924,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -4934,7 +4934,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -4943,14 +4943,14 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':''_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_header_format_5 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     })
     cf_bottom_format_6 = workbook.add_format({'font_color': black_color
@@ -4968,7 +4968,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -4979,7 +4979,7 @@ def create_excel_v3(df, xlfile, income_statement_1, bal_sheet_1, cash_flow_1_df,
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_($* #,##0.00_);[Red]_($* (#,##0.00);_($* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
