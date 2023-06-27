@@ -2143,9 +2143,9 @@ def twelve_month_actual_budget(workbook, df, worksheet):
                 worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_sub_item_num)
                 try:
-                    worksheet.write_number(row_write_val, 15, df['Col16'][i]/100,row_val_format_sub_item_percent)
+                    worksheet.write_number(row_write_val, 15, df['Col16'][i]/100,row_val_format_sub_item_num)
                 except:
-                    worksheet.write_number(row_write_val, 15, 0,row_val_format_sub_item_percent)
+                    worksheet.write_number(row_write_val, 15, 0,row_val_format_sub_item_num)
                 try:
                     worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_sub_item_percent)
                 except:
