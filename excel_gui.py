@@ -65,10 +65,19 @@ output_4 = BytesIO()
 try:
     workbook_not_func = xl.Workbook(output_4)
     #----------------------------------------------------------------------------------- 1
-    je_register_worksheet = workbook_not_func.add_worksheet('JE Register')
-    mnth_gl_worksheet = workbook_not_func.add_worksheet('Mnth GL')
+    act_bud_worksheet_func = workbook_not_func.add_worksheet('test')
+    Income_Statement_wb = workbook_not_func.add_worksheet('Income Statement')
+    worksheet_12_mo_actual = workbook_not_func.add_worksheet('IS 12 Month Actual')
+    bs_wb = workbook_not_func.add_worksheet('BS')
+    cf_worksheet_func = workbook_not_func.add_worksheet('cash flow')
+    tb_worksheet_func = workbook_not_func.add_worksheet('trial balance')
+    worksheet_tenancy_sched = workbook_not_func.add_worksheet('TenSched1')
     ap_detail_sheet = workbook_not_func.add_worksheet('AP Detail')
     worksheet_pay_reg = workbook_not_func.add_worksheet('Payment Register')
+    aging_detail_sheet = workbook_not_func.add_worksheet('AR Detail')
+    je_register_worksheet = workbook_not_func.add_worksheet('JE Register')
+    mnth_gl_worksheet = workbook_not_func.add_worksheet('Mnth GL')
+    #----------------------------------------------------------------------------------- 2
     # procs
     try:
         h = writer.JE_REGISTER_SHEET(workbook_not_func, je_register_data, je_register_worksheet)
@@ -87,10 +96,7 @@ try:
     except:
         print(4)
     #----------------------------------------------------------------------------------- 2
-    aging_detail_sheet = workbook_not_func.add_worksheet('AR Detail')
     if 1 == 1:
-        worksheet_tenancy_sched = workbook_not_func.add_worksheet('TenSched1')
-        worksheet_12_mo_actual = workbook_not_func.add_worksheet('IS 12 Month Actual')
         # procs
         try:
             a = writer.twelve_month_actual_budget(workbook_not_func, data_12_month, worksheet_12_mo_actual)
@@ -105,27 +111,22 @@ try:
         except:
             print(7)
     #----------------------------------------------------------------------------------- 3
-    cf_worksheet_func = workbook_not_func.add_worksheet('cash flow')
     try:
         aa = writer.create_xl_cf(workbook_not_func, cash_flow_df, cf_worksheet_func)
     except:
         print(8)
-    tb_worksheet_func = workbook_not_func.add_worksheet('trial balance')
     try:
         ba = writer.create_xl_tb(workbook_not_func, tb_df_1, tb_worksheet_func)
     except:
         print(9)
-    bs_wb = workbook_not_func.add_worksheet('BS')
     try:
         ca = writer.create_xl_balance_sheet(workbook_not_func, bs_df, bs_wb)
     except:
         print(10)
-    act_bud_worksheet_func = workbook_not_func.add_worksheet('test')
     try:
         fa = writer.budget_comp_sheet_creation(workbook_not_func, actual_budget, act_bud_worksheet_func)
     except:
         print(11)
-    Income_Statement_wb = workbook_not_func.add_worksheet('Income Statement')
     try:
         writer.income_statement(workbook_not_func, is_df, Income_Statement_wb)
     except:
