@@ -80,13 +80,13 @@ try:
     #----------------------------------------------------------------------------------- 2
     # procs
     try:
-        h = writer.JE_REGISTER_SHEET(workbook_not_func, je_register_data, je_register_worksheet)
+        h = writer.JE_REGISTER_SHEET_2(workbook_not_func, je_register_data, je_register_worksheet)
     except:
-        print(1)
+        st.write('error writing JE Register in Excel')
     try:
-        f = writer.mnth_gl_sheet(workbook_not_func, data_mth_gl, mnth_gl_worksheet) ##mnth_gl_sheet
+        f = writer.mnth_gl_sheet_2(workbook_not_func, data_mth_gl, mnth_gl_worksheet) ##mnth_gl_sheet
     except:
-        print(2)
+        st.write('error writing Month General Ledger in Excel')
     try:
         e = writer.ap_detail_sheet_def(workbook_not_func, data_ap_detail, ap_detail_sheet)
     except:
@@ -132,17 +132,7 @@ try:
     except:
         print(12)
     column_width_list = [
-                [11.5, 0, 0, mnth_gl_worksheet]
-                ,[16, 1, 1, mnth_gl_worksheet]
-                ,[10.8, 2, 2, mnth_gl_worksheet]
-                ,[11.3, 3, 3, mnth_gl_worksheet]
-                ,[39.6, 4, 4, mnth_gl_worksheet]
-                ,[9.3, 5, 5, mnth_gl_worksheet]
-                ,[23.3, 6, 6, mnth_gl_worksheet]
-                ,[11.4, 7, 8, mnth_gl_worksheet]
-                ,[14.4, 9, 9, mnth_gl_worksheet]
-                ,[50.7, 10, 10, mnth_gl_worksheet]
-                ,[71, 0, 0, Income_Statement_wb]
+                [71, 0, 0, Income_Statement_wb]
                 ,[17.7, 1, 2, Income_Statement_wb]
                 ,[42.3,0,0, worksheet_12_mo_actual]
                 ,[11.9,1,16, worksheet_12_mo_actual]
@@ -187,16 +177,6 @@ try:
                 ,[17.3, 8, 0, ap_detail_sheet] ## AP Detail
                 ,[10.3, 9, 14, ap_detail_sheet] ## AP Detail
                 ,[27.4, 15, 15, ap_detail_sheet] ## AP Detail
-                ,[9.8, 0, 0, je_register_worksheet] ## JE Register
-                ,[10.2, 1, 3, je_register_worksheet] ## JE Register
-                ,[9.5, 4, 4, je_register_worksheet] ## JE Register
-                ,[12.8, 5, 5, je_register_worksheet] ## JE Register
-                ,[42.2, 6, 6, je_register_worksheet] ## JE Register
-                ,[16, 7, 7, je_register_worksheet] ## JE Register
-                ,[10, 8, 8, je_register_worksheet] ## JE Register
-                ,[12.5, 9, 10, je_register_worksheet] ## JE Register
-                ,[6.3, 12, 12, je_register_worksheet] ## JE Register
-                ,[37.5, 13, 13, je_register_worksheet] ## JE Register
                 # ,[11.5, 0, 0, ] ## General Ledger
                 # ,[16, 0, 0, ] ## General Ledger
                 # ,[10.8, 0, 0, ] ## General Ledger
