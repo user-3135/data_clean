@@ -152,52 +152,7 @@ try:
                 ,[38.7, 0, 0, tb_worksheet_func] ## Trial Balance
                 ,[16.4, 1, 4, tb_worksheet_func] ## Trial Balance
                 ,[12.7, 0, 16, worksheet_tenancy_sched] ## Tenancy Schedule
-                ,[10, 0, 0, aging_detail_sheet] ## AR Detail
-                ,[9.8, 1, 1, aging_detail_sheet] ## AR Detail
-                ,[42.2, 2, 2, aging_detail_sheet] ## AR Detail
-                ,[9.8, 3, 3, aging_detail_sheet] ## AR Detail
-                ,[7.8, 4, 4, aging_detail_sheet] ## AR Detail
-                ,[8.8, 5, 5, aging_detail_sheet] ## AR Detail
-                ,[10.3, 6, 6, aging_detail_sheet] ## AR Detail
-                ,[10.3, 7, 7, aging_detail_sheet] ## AR Detail
-                ,[12, 8, 14, aging_detail_sheet] ## AR Detail
-                ,[14.4, 0, 0, worksheet_pay_reg] ## Payment Register
-                ,[6.4, 1, 1, worksheet_pay_reg] ## Payment Register
-                ,[9.5, 2, 2, worksheet_pay_reg] ## Payment Register
-                ,[10.7, 3, 3, worksheet_pay_reg] ## Payment Register
-                ,[22.9, 4, 4, worksheet_pay_reg] ## Payment Register
-                ,[10.2, 5, 5, worksheet_pay_reg] ## Payment Register
-                ,[9.5, 6, 6, worksheet_pay_reg] ## Payment Register
-                ,[8, 7, 7, worksheet_pay_reg] ## Payment Register
-                ,[7.5, 8, 8, worksheet_pay_reg] ## Payment Register
-                ,[8.2, 9, 9, worksheet_pay_reg] ## Payment Register
-                ,[10, 10, 10, worksheet_pay_reg ] ## Payment Register
-                ,[16, 11, 11, worksheet_pay_reg] ## Payment Register
-                ,[10, 12, 12, worksheet_pay_reg] ## Payment Register
-                ,[47.3, 13, 13, worksheet_pay_reg] ## Payment Register
-                ,[13.8, 0, 0, ap_detail_sheet] ## AP Detail
-                ,[12.2, 1, 0, ap_detail_sheet] ## AP Detail
-                ,[25.2, 2, 0, ap_detail_sheet] ## AP Detail
-                ,[6.4, 3, 0, ap_detail_sheet] ## AP Detail
-                ,[7, 4, 0, ap_detail_sheet] ## AP Detail
-                ,[8.2, 5, 0, ap_detail_sheet] ## AP Detail
-                ,[10.8, 6, 0, ap_detail_sheet] ## AP Detail
-                ,[16.3, 7, 0, ap_detail_sheet] ## AP Detail
-                ,[17.3, 8, 0, ap_detail_sheet] ## AP Detail
-                ,[10.3, 9, 14, ap_detail_sheet] ## AP Detail
-                ,[27.4, 15, 15, ap_detail_sheet] ## AP Detail
-                # ,[11.5, 0, 0, ] ## General Ledger
-                # ,[16, 0, 0, ] ## General Ledger
-                # ,[10.8, 0, 0, ] ## General Ledger
-                # ,[11.3, 0, 0, ] ## General Ledger
-                # ,[39.7, 0, 0, ] ## General Ledger
-                # ,[9.3, 0, 0, ] ## General Ledger
-                # ,[23.3, 0, 0, ] ## General Ledger
-                # ,[11.4, 0, 0, ] ## General Ledger
-                # ,[14.4, 0, 0, ] ## General Ledger
-                # ,[50.7, 0, 0, ] ## General Ledger
-    
-        ]
+    ]
     for i in column_width_list:
         try:
             i[3].set_column(i[1],i[2], i[0])
