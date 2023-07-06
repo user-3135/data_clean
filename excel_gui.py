@@ -88,14 +88,20 @@ try:
     except:
         st.write('error writing Month General Ledger in Excel')
     try:
-        e = writer.ap_detail_sheet_def(workbook_not_func, data_ap_detail, ap_detail_sheet)
+        e = writer.ap_detail_sheet_def_2(workbook_not_func, data_ap_detail, ap_detail_sheet)
     except:
-        print(3)
-    try:
-        d = writer.payment_register_sheet(workbook_not_func, data_payment_register, worksheet_pay_reg)
+        try:
+            e = writer.ap_detail_sheet_def(workbook_not_func, data_ap_detail, ap_detail_sheet)
+        except:
+            st.write('error writing Month AP Detail in Excel')
+    try: #payment_register_sheet_2
+        d = writer.payment_register_sheet_2(workbook_not_func, data_payment_register, worksheet_pay_reg)
     except:
-        print(4)
-    #----------------------------------------------------------------------------------- 2
+        try:
+            d = writer.payment_register_sheet(workbook_not_func, data_payment_register, worksheet_pay_reg)
+        except:
+            st.write('error writing Month Payment Register in Excel')
+#----------------------------------------------------------------------------------- 2
     if 1 == 1:
         # procs
         try:
@@ -106,10 +112,13 @@ try:
             b = writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
         except:
             print(6)
-        try:
-            c = writer.aging_detail(workbook_not_func, data_ar_detail, aging_detail_sheet)
+        try: #aging_detail_2
+            c = writer.aging_detail_2(workbook_not_func, data_ar_detail, aging_detail_sheet)
         except:
-            print(7)
+            try:
+                c = writer.aging_detail(workbook_not_func, data_ar_detail, aging_detail_sheet)
+            except:
+                st.write('error writing Aging Detail in Excel')
     #----------------------------------------------------------------------------------- 3
     try:
         aa = writer.create_xl_cf(workbook_not_func, cash_flow_df, cf_worksheet_func)
