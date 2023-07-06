@@ -93,6 +93,932 @@ def flag_total_rows_3(val_1):
         pass
     return flag_total_val
 # ----------------------------------------------------------------- new stuff 7-2023
+def aging_detail_2(workbook, df, worksheet):
+    yellow_color = '#b4992d'
+    dark_gray_color = '#505050'
+    white_color = '#FFFFFF'
+    black_color = '#000000'
+    grey_color = '#211f20'
+    header_1 = df.columns[0]
+    df = df.rename(columns={df.columns[0]: 'Col1'
+                           , df.columns[1]: 'Col2'
+                           , df.columns[2]: 'Col3'
+                           , df.columns[3]: 'Col4'
+                           , df.columns[4]: 'Col5'
+                           , df.columns[5]: 'Col6'
+                           , df.columns[6]: 'Col7'
+                           , df.columns[7]: 'Col8'
+                           , df.columns[8]: 'Col9'
+                           , df.columns[9]: 'Col10'
+                           , df.columns[10]: 'Col11'
+                           , df.columns[11]: 'Col12'
+                           , df.columns[12]: 'Col13'
+                           , df.columns[13]: 'Col14'
+                           , df.columns[14]: 'Col15'
+                           })
+    header_2 = df['Col1'][0]
+    header_list_1 = [df['Col1'][1]
+                     , df['Col2'][1] #B
+                     , df['Col3'][1] #C
+                     , df['Col4'][1] #D
+                     , df['Col5'][1] #E
+                     , df['Col6'][1] #F
+                     , df['Col7'][1] #G
+                     , df['Col8'][1] #H
+                     , df['Col9'][1] #I
+                     , df['Col10'][1] #J
+                     , df['Col11'][1] #K
+                     , df['Col12'][1] #L
+                     , df['Col13'][1] #M
+                     , df['Col14'][1] #N
+                     , df['Col15'][1] #O
+                    ]
+    header_list_2 = [None #A
+                     , df['Col2'][2] #B
+                     , df['Col3'][2] #C
+                     , df['Col4'][2] #D
+                     , df['Col5'][2] #E
+                     , df['Col6'][2] #F
+                     , df['Col7'][2] #G
+                     , df['Col8'][2] #H
+                     , df['Col9'][2] #I
+                     , df['Col10'][2] #J
+                     , df['Col11'][2] #K
+                     , df['Col12'][2] #L
+                     , df['Col13'][2] #M
+                     , df['Col14'][2] #N
+                     , df['Col15'][2] #O
+                    ]
+    df=df.dropna(how='all').reset_index(drop=True)
+    df['total'] = df.apply(lambda x: flag_box(x['Col1'], x['Col3']), axis=1) # there will be some headers that check this, so headers is first in if elif logic
+    df['subtotal'] = df.apply(lambda x: flag_box(x['Col3'], x['Col4']), axis=1)
+    df['header'] = df.apply(lambda x: flag_box(x['Col1'], x['Col9']), axis=1)
+    df['data'] = df.apply(lambda x: flag_box(x['Col4'], x['Col2']), axis=1)
+    # wirte excel
+    header_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':14
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A1:N1", header_1, header_format_1)
+    header_format_2 = workbook.add_format({'font_color': dark_gray_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A2:N2", header_2, header_format_2)
+    header_format_3 = workbook.add_format({'font_color': white_color
+                                    , 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':11
+                                    , 'align':'center'
+                                     })
+    for col in range(15):
+        try:
+            str(header_list_1[col])
+            worksheet.write(2, col, header_list_1[col], header_format_3)
+        except:
+            worksheet.write_blank(2, col, None, header_format_3)
+        try:
+            str(header_list_2[col])
+            worksheet.write(3, col, header_list_2[col], header_format_3)
+        except:
+            worksheet.write_blank(3, col, None, header_format_3)
+    worksheet.merge_range(4, 0, 4, 13, '', header_format_2)
+    worksheet.set_row(4,7.5)
+    row_write_val = 5
+    header_format_body = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    data_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    data_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'center'
+                                    , 'num_format':44
+                                     })
+    data_format_3 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':14
+                                     })
+    subtotal_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bold':True
+                                    })
+    subtotal_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    })
+    total_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'num_format':44})
+    total_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':14
+                                    , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'num_format':44
+                                    })
+    grand_total_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'border_color':black_color
+                                    , 'num_format':44
+                                    })
+    grand_total_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':14
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'border_color':black_color
+                                    , 'num_format':44
+                                    })
+    bottom_line_format = workbook.add_format({'font_color': black_color
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'num_format':44
+                                    })
+    for i in range(4, df.shape[0]):
+        if df['header'][i] == 1:
+            worksheet.merge_range(row_write_val, 0, row_write_val, 14, df['Col1'][i], header_format_body)
+            row_write_val = row_write_val + 1
+        elif df['data'][i] == 1:
+            worksheet.write_string(row_write_val, 0, df['Col1'][i],data_format_1)
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],data_format_1)
+            worksheet.write_string(row_write_val, 3, df['Col4'][i],data_format_1)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],data_format_1)
+            worksheet.write_string(row_write_val, 5, df['Col6'][i],data_format_1)
+            worksheet.write_datetime(row_write_val, 6, df['Col7'][i],data_format_3)
+            worksheet.write_string(row_write_val, 7, df['Col8'][i],data_format_3)
+            worksheet.write_number(row_write_val, 8, df['Col9'][i],data_format_2)
+            worksheet.write_number(row_write_val, 9, df['Col10'][i],data_format_2)
+            worksheet.write_number(row_write_val, 10, df['Col11'][i],data_format_2)
+            worksheet.write_number(row_write_val, 11, df['Col12'][i],data_format_2)
+            worksheet.write_number(row_write_val, 12, df['Col13'][i],data_format_2)
+            worksheet.write_number(row_write_val, 13, df['Col14'][i],data_format_2)
+            worksheet.write_number(row_write_val, 14, df['Col15'][i],data_format_2)
+            row_write_val = row_write_val + 1
+        elif df['subtotal'][i] == 1:
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],subtotal_format_1)
+            worksheet.write_number(row_write_val, 8, df['Col9'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 9, df['Col10'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 10, df['Col11'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 11, df['Col12'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 12, df['Col13'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 13, df['Col14'][i],subtotal_format_2)
+            worksheet.write_number(row_write_val, 14, df['Col15'][i],subtotal_format_2)
+            row_write_val = row_write_val + 1
+            worksheet.set_row(row_write_val,7.5)
+            row_write_val = row_write_val + 1
+        elif df['total'][i] == 1:
+            if df['Col1'][i] == 'Grand Total':
+                worksheet.set_row(row_write_val-1,7.5)
+                worksheet.merge_range(row_write_val - 1, 0, row_write_val - 1, 14, '', bottom_line_format)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],grand_total_format_1)
+                worksheet.write_blank(row_write_val, 1, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 2, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 3, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 4, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 5, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 6, None, grand_total_format_1)
+                worksheet.write_blank(row_write_val, 7, None, grand_total_format_1)
+                worksheet.write_number(row_write_val, 8, float(df['Col9'][i]),grand_total_format_2)
+                worksheet.write_number(row_write_val, 9, df['Col10'][i],grand_total_format_2)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],grand_total_format_2)
+                worksheet.write_number(row_write_val, 11, df['Col12'][i],grand_total_format_2)
+                worksheet.write_number(row_write_val, 12, df['Col13'][i],grand_total_format_2)
+                worksheet.write_number(row_write_val, 13, df['Col14'][i],grand_total_format_2)
+                worksheet.write_number(row_write_val, 14, df['Col15'][i],grand_total_format_2)
+                row_write_val = row_write_val + 1
+            else:
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],total_format_1)
+                worksheet.write_blank(row_write_val, 1, None, total_format_1)
+                worksheet.write_blank(row_write_val, 2, None, total_format_1)
+                worksheet.write_blank(row_write_val, 3, None, total_format_1)
+                worksheet.write_blank(row_write_val, 4, None, total_format_1)
+                worksheet.write_blank(row_write_val, 5, None, total_format_1)
+                worksheet.write_blank(row_write_val, 6, None, total_format_1)
+                worksheet.write_blank(row_write_val, 7, None, total_format_1)
+                worksheet.write_number(row_write_val, 8, df['Col9'][i],total_format_2)
+                worksheet.write_number(row_write_val, 9, df['Col10'][i],total_format_2)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],total_format_2)
+                worksheet.write_number(row_write_val, 11, df['Col12'][i],total_format_2)
+                worksheet.write_number(row_write_val, 12, df['Col13'][i],total_format_2)
+                worksheet.write_number(row_write_val, 13, df['Col14'][i],total_format_2)
+                worksheet.write_number(row_write_val, 14, df['Col15'][i],total_format_2)
+                row_write_val = row_write_val + 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+        else:
+            pass
+    column_width_list = [
+        [10, 0, 0, worksheet] ## AR Detail
+        ,[9.8, 1, 1, worksheet] ## AR Detail
+        ,[42.2, 2, 2, worksheet] ## AR Detail
+        ,[9.8, 3, 3, worksheet] ## AR Detail
+        ,[7.8, 4, 4, worksheet] ## AR Detail
+        ,[8.8, 5, 5, worksheet] ## AR Detail
+        ,[10.3, 6, 6, worksheet] ## AR Detail
+        ,[10.3, 7, 7, worksheet] ## AR Detail
+        ,[14.36, 8, 8, worksheet] ## AR Detail
+        ,[13, 9, 11, worksheet] ## AR Detail
+        ,[15.27, 12, 12, worksheet] ## AR Detail
+        ,[13, 13, 13, worksheet] ## AR Detail
+        ,[15.27, 14, 14, worksheet] ## AR Detail
+    ]
+    for i in column_width_list:
+        try:
+            i[3].set_column(i[1],i[2], i[0])
+        except:
+            pass
+    worksheet.set_landscape()
+    worksheet.set_margins(.5,.5,.5,.5)
+    worksheet.repeat_rows(0, 3)
+    worksheet.print_area(0,0, row_write_val, 14)
+    worksheet.set_page_view(2)
+    total_pages = max(math.ceil(row_write_val/50), 1)
+    worksheet.fit_to_pages(1, total_pages)
+    return df
+def ap_detail_sheet_def_2(workbook, df, worksheet):
+    yellow_color = '#b4992d'
+    dark_gray_color = '#505050'
+    white_color = '#FFFFFF'
+    black_color = '#000000'
+    grey_color = '#211f20'
+    header_1 = df.columns[0]
+    df = df.rename(columns={df.columns[0]: 'Col1'
+                           , df.columns[1]: 'Col2'
+                           , df.columns[2]: 'Col3'
+                           , df.columns[3]: 'Col4'
+                           , df.columns[4]: 'Col5'
+                           , df.columns[5]: 'Col6'
+                           , df.columns[6]: 'Col7'
+                           , df.columns[7]: 'Col8'
+                           , df.columns[8]: 'Col9'
+                           , df.columns[9]: 'Col10'
+                           , df.columns[10]: 'Col11'
+                           , df.columns[11]: 'Col12'
+                           , df.columns[12]: 'Col13'
+                           , df.columns[13]: 'Col14'
+                           , df.columns[14]: 'Col15'
+                           , df.columns[15]: 'Col16'
+                           })
+    header_2 = df['Col1'][0]
+    header_3 = df['Col1'][1]
+    header_4 = df['Col1'][2]
+    header_list_1 = [df['Col1'][3] #A
+                     , df['Col2'][3] #B
+                     , df['Col3'][3] #C
+                     , df['Col4'][3] #D
+                     , df['Col5'][3] #E
+                     , df['Col6'][3] #F
+                     , df['Col7'][3] #G
+                     , df['Col8'][3] #H
+                     , df['Col9'][3] #I
+                     , df['Col10'][3] #J
+                     , df['Col11'][3] #K
+                     , df['Col12'][3] #M
+                     , df['Col13'][3] #N
+                     , df['Col14'][3] #O
+                     , df['Col15'][3] #P
+                     , df['Col16'][3] #Q
+                    ]
+    header_list_2 = [df['Col1'][4] #A
+                     , df['Col2'][4] #B
+                     , df['Col3'][4] #C
+                     , df['Col4'][4] #D
+                     , df['Col5'][4] #E
+                     , df['Col6'][4] #F
+                     , df['Col7'][4] #G
+                     , df['Col8'][4] #H
+                     , df['Col9'][4] #I
+                     , df['Col10'][4] #J
+                     , df['Col11'][4] #K
+                     , df['Col12'][4] #M
+                     , df['Col13'][4] #N
+                     , df['Col14'][4] #O
+                     , df['Col15'][4] #P
+                     , df['Col16'][4] #Q
+                    ]
+    header_list_3 = [df['Col1'][5] #A
+                     , df['Col2'][5] #B
+                     , df['Col3'][5] #C
+                     , df['Col4'][5] #D
+                     , df['Col5'][5] #E
+                     , df['Col6'][5] #F
+                     , df['Col7'][5] #G
+                     , df['Col8'][5] #H
+                     , df['Col9'][5] #I
+                     , df['Col10'][5] #J
+                     , df['Col11'][5] #K
+                     , df['Col12'][5] #M
+                     , df['Col13'][5] #N
+                     , df['Col14'][5] #O
+                     , df['Col15'][5] #P
+                     , df['Col16'][5] #Q
+                    ]
+    df=df.dropna(how='all').reset_index(drop=True)
+    df['color_col'] = df.apply(lambda x: flag_box(x['Col1'], x['Col11']), axis=1) # there will be some headers that check this, so headers is first in if elif logic
+    df['data'] = df.apply(lambda x: flag_box(x['Col3'], x['Col2']), axis=1)
+    df['total'] = df.apply(lambda x: flag_total_rows_2(x['Col1']), axis=1)
+    # wirte excel
+    header_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':14
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A1:P1", header_1, header_format_1)
+    header_format_2 = workbook.add_format({'font_color': dark_gray_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A2:P2", header_2, header_format_2)
+    worksheet.merge_range("A3:P3", header_3, header_format_2)
+    worksheet.merge_range("A4:P4", header_4, header_format_2)
+    header_format_3 = workbook.add_format({'font_color': white_color
+                                    , 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':11
+                                    , 'align':'center'
+                                     })
+    for col in range(16):
+        try:
+            str(header_list_1[col])
+            worksheet.write(4, col, header_list_1[col], header_format_3)
+        except:
+            worksheet.write_blank(4, col, None, header_format_3)
+        try:
+            str(header_list_2[col])
+            worksheet.write(5, col, header_list_2[col], header_format_3)
+        except:
+            worksheet.write_blank(5, col, None, header_format_3)
+        try:
+            str(header_list_3[col])
+            worksheet.write(6, col, header_list_3[col], header_format_3)
+        except:
+            worksheet.write_blank(6, col, None, header_format_3)
+    worksheet.merge_range(7, 0, 7, 14, '', header_format_2)
+    worksheet.set_row(7,7.5)
+    row_write_val = 8
+    header_format_body = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    header_format_date_1 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'mm-yyyy'
+                                     })
+    header_format_date_2 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':14
+                                     })
+    data_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    })
+    data_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                        })
+    data_format_3 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':14
+                                        })
+    total_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':False
+                                        })
+    total_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':False
+                                        })
+    grand_total_format_bottom = workbook.add_format({'font_color': black_color
+                                    , 'border_color': black_color
+                                    , 'bottom':1
+                                        })
+    grand_total_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    , 'bottom':1
+                                    , 'border_color': black_color
+                                        })
+    grand_total_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'left':0
+                                    , 'top':0
+                                    , 'right':0
+                                    #, 'bottom':3
+                                    , 'border_color':black_color
+                                        })
+    grand_total_format_3 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'left':0
+                                    , 'top':0
+                                    , 'right':0
+                                    #, 'bottom':3
+                                    , 'border_color':black_color
+                                        })
+    for i in range(5, df.shape[0]): #flag_total_rows_2
+        if df['color_col'][i] == 1:
+            worksheet.write_string(row_write_val, 0, df['Col1'][i],header_format_body)
+            worksheet.write(row_write_val, 1, df['Col2'][i],header_format_body)
+            worksheet.write_blank(row_write_val, 2, None,header_format_body)
+            worksheet.write_blank(row_write_val, 3, None,header_format_body)
+            worksheet.write_blank(row_write_val, 4, None,header_format_body)
+            worksheet.write_blank(row_write_val, 5, None,header_format_body)
+            worksheet.write_blank(row_write_val, 6, None,header_format_body)
+            worksheet.write_blank(row_write_val, 7, None,header_format_body)
+            worksheet.write_blank(row_write_val, 8, None,header_format_body)
+            worksheet.write_blank(row_write_val, 9, None,header_format_body)
+            worksheet.write_blank(row_write_val, 10, None,header_format_body)
+            worksheet.write_blank(row_write_val, 11, None,header_format_body)
+            worksheet.write_blank(row_write_val, 12, None,header_format_body)
+            worksheet.write_blank(row_write_val, 13, None,header_format_body)
+            worksheet.write_blank(row_write_val, 14, None,header_format_body)
+            worksheet.write_blank(row_write_val, 15, None,header_format_body)
+            row_write_val += 1
+        elif df['total'][i] == 1:
+            if df['Col1'][i] == 'Grand Total':
+                # grand_total_format_bottom
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],grand_total_format_2)
+                worksheet.write_blank(row_write_val, 1, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 2, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 3, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 4, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 5, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 6, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 7, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 8, None ,grand_total_format_2)
+                worksheet.write_number(row_write_val, 9, df['Col10'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 11, df['Col12'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 12, df['Col13'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 13, df['Col14'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 14, df['Col15'][i],grand_total_format_3)
+                worksheet.write_blank(row_write_val, 15, None ,grand_total_format_3)
+                worksheet.merge_range(row_write_val - 1, 0, row_write_val - 1, 15, '', grand_total_format_bottom)
+                row_write_val += 1
+            elif df['Col1'][i] == 'Grand Total ':
+                # grand_total_format_bottom
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],grand_total_format_2)
+                worksheet.write_blank(row_write_val, 1, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 2, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 3, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 4, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 5, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 6, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 7, None ,grand_total_format_2)
+                worksheet.write_blank(row_write_val, 8, None ,grand_total_format_2)
+                worksheet.write_number(row_write_val, 9, df['Col10'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 11, df['Col12'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 12, df['Col13'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 13, df['Col14'][i],grand_total_format_3)
+                worksheet.write_number(row_write_val, 14, df['Col15'][i],grand_total_format_3)
+                worksheet.write_blank(row_write_val, 15, None ,grand_total_format_3)
+                worksheet.merge_range(row_write_val - 1, 0, row_write_val - 1, 15, '', grand_total_format_bottom)
+                row_write_val += 1
+            else:
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],total_format_1)
+                worksheet.write_blank(row_write_val, 1, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 2, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 3, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 4, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 5, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 6, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 7, None ,total_format_1)
+                worksheet.write_blank(row_write_val, 8, None ,total_format_1)
+                worksheet.write_number(row_write_val, 9, df['Col10'][i],total_format_2)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],total_format_2)
+                worksheet.write_number(row_write_val, 11, df['Col12'][i],total_format_2)
+                worksheet.write_number(row_write_val, 12, df['Col13'][i],total_format_2)
+                worksheet.write_number(row_write_val, 13, df['Col14'][i],total_format_2)
+                worksheet.write_number(row_write_val, 14, df['Col15'][i],total_format_2)
+                worksheet.write_blank(row_write_val, 15, None ,total_format_1)
+                row_write_val += 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+        elif df['data'][i] == 1:
+            worksheet.write(row_write_val, 2, df['Col3'][i],data_format_1)
+            worksheet.write(row_write_val, 3, df['Col4'][i],data_format_1)
+            worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1)
+            worksheet.write(row_write_val, 5, df['Col6'][i],data_format_1)
+            worksheet.write(row_write_val, 6, df['Col7'][i],data_format_3)
+            worksheet.write(row_write_val, 7, df['Col8'][i],data_format_1)
+            worksheet.write(row_write_val, 8, df['Col9'][i],data_format_1)
+            worksheet.write(row_write_val, 9, df['Col10'][i],data_format_2)
+            worksheet.write(row_write_val, 10, df['Col11'][i],data_format_2)
+            worksheet.write(row_write_val, 11, df['Col12'][i],data_format_2)
+            worksheet.write(row_write_val, 12, df['Col13'][i],data_format_2)
+            worksheet.write(row_write_val, 13, df['Col14'][i],data_format_2)
+            worksheet.write(row_write_val, 14, df['Col15'][i],data_format_2)
+            worksheet.write(row_write_val, 15, df['Col16'][i],data_format_1)
+            row_write_val += 1
+        else:
+            pass
+    column_width_list = [[13.8, 0, 0, worksheet] ## AP Detail
+                ,[12.2, 1, 1, worksheet] ## AP Detail
+                ,[25.2, 2, 2, worksheet] ## AP Detail
+                ,[17.55, 3, 3, worksheet] ## AP Detail
+                ,[17.55, 4, 4, worksheet] ## AP Detail
+                ,[17.55, 5, 5, worksheet] ## AP Detail
+                ,[17.55, 6, 6, worksheet] ## AP Detail
+                ,[35.73, 7, 7, worksheet] ## AP Detail
+                ,[17.55, 8, 8, worksheet] ## AP Detail
+                ,[10.73, 9, 14, worksheet] ## AP Detail
+                ,[35.73, 15, 15, worksheet] ## AP Detail
+    ]
+    for i in column_width_list:
+        try:
+            i[3].set_column(i[1],i[2], i[0])
+        except:
+            pass
+    worksheet.set_landscape()
+    worksheet.set_margins(.5,.5,.5,.5)
+    worksheet.repeat_rows(0, 7)
+    worksheet.print_area(0,0, row_write_val, 15)
+    worksheet.set_page_view(2)
+    total_pages = max(math.ceil(row_write_val/50), 1)
+    worksheet.fit_to_pages(1, total_pages)
+    return df
+def payment_register_sheet_2(workbook, df, worksheet):
+    yellow_color = '#b4992d'
+    dark_gray_color = '#505050'
+    white_color = '#FFFFFF'
+    black_color = '#000000'
+    grey_color = '#211f20'
+    header_1 = df.columns[0]
+    df = df.rename(columns={df.columns[0]: 'Col1'
+                           , df.columns[1]: 'Col2'
+                           , df.columns[2]: 'Col3'
+                           , df.columns[3]: 'Col4'
+                           , df.columns[4]: 'Col5'
+                           , df.columns[5]: 'Col6'
+                           , df.columns[6]: 'Col7'
+                           , df.columns[7]: 'Col8'
+                           , df.columns[8]: 'Col9'
+                           , df.columns[9]: 'Col10'
+                           , df.columns[10]: 'Col11'
+                           , df.columns[11]: 'Col12'
+                           , df.columns[12]: 'Col13'
+                           , df.columns[13]: 'Col14'
+                           })
+    header_2 = df['Col1'][0]
+    header_3 = df['Col1'][1]
+    header_list_1 = [df['Col1'][1]
+                     , df['Col2'][1] #B
+                     , df['Col3'][1] #C
+                     , df['Col4'][1] #D
+                     , df['Col5'][1] #E
+                     , df['Col6'][1] #F
+                     , df['Col7'][1] #G
+                     , df['Col8'][1] #H
+                     , df['Col9'][1] #I
+                     , df['Col10'][1] #J
+                     , df['Col11'][1] #K
+                     , df['Col12'][1] #L
+                     , df['Col13'][1] #M
+                     , df['Col14'][1] #N
+                    ]
+    header_list_2 = [None #A
+                     , df['Col2'][2] #B
+                     , df['Col3'][2] #C
+                     , df['Col4'][2] #D
+                     , df['Col5'][2] #E
+                     , df['Col6'][2] #F
+                     , df['Col7'][2] #G
+                     , df['Col8'][2] #H
+                     , df['Col9'][2] #I
+                     , df['Col10'][2] #J
+                     , df['Col11'][2] #K
+                     , df['Col12'][2] #L
+                     , df['Col13'][2] #M
+                     , df['Col14'][2] #N
+                    ]
+    df=df.dropna(how='all').reset_index(drop=True)
+    df['color_col'] = df.apply(lambda x: flag_box(x['Col1'], x['Col11']), axis=1) # there will be some headers that check this, so headers is first in if elif logic
+    df['data'] = df.apply(lambda x: flag_box(x['Col9'], x['Col8']), axis=1)
+    df['total'] = df.apply(lambda x: flag_total_rows_2(x['Col1']), axis=1)
+    # wirte excel
+    header_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':14
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A1:N1", header_1, header_format_1)
+    header_format_2 = workbook.add_format({'font_color': dark_gray_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A2:N2", header_2, header_format_2)
+    worksheet.merge_range("A3:N3", header_3, header_format_2)
+    header_format_3 = workbook.add_format({'font_color': white_color
+                                    , 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':11
+                                    , 'align':'center'
+                                     })
+    for col in range(14):
+        try:
+            str(header_list_2[col])
+            worksheet.write(3, col, header_list_2[col], header_format_3)
+        except:
+            worksheet.write_blank(3, col, None, header_format_3)
+    worksheet.merge_range(4, 0, 4, 14, '', header_format_2)
+    worksheet.set_row(4,7.5)
+    row_write_val = 5
+    header_format_body = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    header_format_date_1 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'mm-yyyy'
+                                     })
+    header_format_date_2 = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':14
+                                     })
+    data_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    })
+    data_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                        })
+    total_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'left':0
+                                    , 'right':0
+                                    ,'top':0
+                                        })
+    total_format_2 = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':True
+                                    , 'border':6
+                                    , 'left':0
+                                    , 'right':0
+                                    ,'top':0
+                                        })
+    total_format_1_gray = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':False
+                                        })
+    total_format_2_gray = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':False
+                                        })
+    grand_total_base = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bold':False
+                                    , 'bottom': 1
+                                        })
+    
+    for i in range(4, df.shape[0]): #flag_total_rows_2
+        if df['color_col'][i] == 1:
+            worksheet.write_string(row_write_val, 0, df['Col1'][i],header_format_body)
+            worksheet.write_string(row_write_val, 1, df['Col2'][i],header_format_body)
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],header_format_body)
+            worksheet.write_string(row_write_val, 3, df['Col4'][i],header_format_body)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],header_format_body)
+            worksheet.write_datetime(row_write_val, 5, df['Col6'][i],header_format_date_2)
+            worksheet.write_datetime(row_write_val, 6, df['Col7'][i],header_format_date_1)
+            worksheet.write_string(row_write_val, 7, df['Col8'][i],header_format_body)
+            worksheet.write_blank(row_write_val, 8, None,header_format_body)
+            worksheet.write_blank(row_write_val, 9, None,header_format_body)
+            worksheet.write_blank(row_write_val, 10, None,header_format_body)
+            worksheet.write_blank(row_write_val, 11, None,header_format_body)
+            worksheet.write_blank(row_write_val, 12, None,header_format_body)
+            worksheet.write_blank(row_write_val, 13, None,header_format_body)
+            row_write_val += 1
+        elif df['total'][i] == 1:
+            if df['Col1'][i] == 'Grand Total ':
+                worksheet.merge_range(row_write_val-1, 0, row_write_val-1, 13, '', grand_total_base)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],total_format_1)
+                worksheet.write_blank(row_write_val, 1, None,total_format_1)
+                worksheet.write_blank(row_write_val, 2, None,total_format_1)
+                worksheet.write_blank(row_write_val, 3, None,total_format_1)
+                worksheet.write_blank(row_write_val, 4, None,total_format_1)
+                worksheet.write_blank(row_write_val, 5, None,total_format_1)
+                worksheet.write_blank(row_write_val, 6, None,total_format_1)
+                worksheet.write_blank(row_write_val, 7, None,total_format_1)
+                worksheet.write_blank(row_write_val, 8, None,total_format_1)
+                worksheet.write_blank(row_write_val, 9, None,total_format_1)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],total_format_2)
+                worksheet.write_blank(row_write_val, 11, None,total_format_1)
+                worksheet.write_blank(row_write_val, 12, None,total_format_1)
+                worksheet.write_blank(row_write_val, 13, None,total_format_1)
+                row_write_val += 1
+            else:
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],total_format_1_gray)
+                worksheet.write_blank(row_write_val, 1, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 2, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 3, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 4, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 5, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 6, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 7, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 8, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 9, None,total_format_1_gray)
+                worksheet.write_number(row_write_val, 10, df['Col11'][i],total_format_2_gray)
+                worksheet.write_blank(row_write_val, 11, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 12, None,total_format_1_gray)
+                worksheet.write_blank(row_write_val, 13, None,total_format_1_gray)
+                row_write_val += 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+        elif df['data'][i] == 1:
+            worksheet.write_blank(row_write_val, 0, None,data_format_1)
+            worksheet.write_blank(row_write_val, 1, None,data_format_1)
+            worksheet.write_blank(row_write_val, 2, None,data_format_1)
+            worksheet.write_blank(row_write_val, 3, None,data_format_1)
+            worksheet.write_blank(row_write_val, 4, None,data_format_1)
+            worksheet.write_blank(row_write_val, 5, None,data_format_1)
+            worksheet.write_blank(row_write_val, 6, None,data_format_1)
+            worksheet.write_blank(row_write_val, 7, None,data_format_1)
+            try:
+                worksheet.write_string(row_write_val, 8, df['Col9'][i],data_format_1)
+            except:
+                try:
+                    worksheet.write(row_write_val, 8, df['Col9'][i],data_format_1)
+                except:
+                    worksheet.write_blank(row_write_val, 8, None,data_format_1)
+            #----------------
+            try:
+                worksheet.write_string(row_write_val, 9, df['Col10'][i],data_format_1)
+            except:
+                try:
+                    worksheet.write(row_write_val, 9, df['Col10'][i],data_format_1)
+                except:
+                    worksheet.write_blank(row_write_val, 8, None,data_format_1)
+            try:
+                loop_val_col_11 = float(df['Col11'][i])
+            except:
+                loop_val_col_11 = str(df['Col11'][i])
+            try:
+                worksheet.write_number(row_write_val, 10, loop_val_col_11,data_format_2)
+            except:
+                worksheet.write(row_write_val, 10, loop_val_col_11,data_format_2)
+            try:
+                worksheet.write(row_write_val, 11, df['Col12'][i],data_format_1)
+            except:
+                worksheet.write_blank(row_write_val, 7, None,data_format_1)
+            try:
+                worksheet.write(row_write_val, 12, df['Col13'][i],data_format_1)
+            except:
+                worksheet.write_blank(row_write_val, 7, None,data_format_1)
+            worksheet.write_string(row_write_val, 13, df['Col14'][i] ,data_format_1)
+            row_write_val += 1
+        else:
+            pass            
+    column_width_list = [[14.4, 0, 0, worksheet] ## Payment Register
+            ,[13, 1, 2, worksheet] ## Payment Register
+            ,[15.27, 3, 3, worksheet] ## Payment Register
+            ,[33.45, 4, 4, worksheet] ## Payment Register
+            ,[13, 5, 6, worksheet] ## Payment Register
+            ,[19.36, 7, 7, worksheet] ## Payment Register
+            ,[10.73, 8, 10, worksheet] ## Payment Register
+            ,[18.45, 11, 11, worksheet] ## Payment Register
+            ,[15.27, 12, 12, worksheet] ## Payment Register
+            ,[49.35, 13, 13, worksheet] ## Payment Register
+    ]
+    for i in column_width_list:
+        try:
+            i[3].set_column(i[1],i[2], i[0])
+        except:
+            pass
+    worksheet.set_landscape()
+    worksheet.set_margins(.5,.5,.5,.5)
+    worksheet.repeat_rows(0, 3)
+    worksheet.print_area(0,0, row_write_val, 13)
+    worksheet.set_page_view(2)
+    total_pages = max(math.ceil(row_write_val/50), 1)
+    worksheet.fit_to_pages(1, total_pages)
+    return df
+
+
+
+# -----------------------------------------------------------------
 def JE_REGISTER_SHEET_2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -661,7 +1587,13 @@ def mnth_gl_sheet_2(workbook, df, worksheet): ##mnth_gl_sheet
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
-
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
+# -----------------------------------------------------------------
 # ----------------------------------------------------------------- new stuff
 def income_statement(workbook, income_statement_1, Income_Statement):
     yellow_color = '#b4992d'
