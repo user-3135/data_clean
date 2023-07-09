@@ -1589,6 +1589,464 @@ def mnth_gl_sheet_2(workbook, df, worksheet): ##mnth_gl_sheet
     return df
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
+def ten_sched_1_v2(workbook, df, worksheet):
+    yellow_color = '#b4992d'
+    dark_gray_color = '#505050'
+    white_color = '#FFFFFF'
+    black_color = '#000000'
+    grey_color = '#211f20'
+    header_1 = df.columns[0]
+    df = df.rename(columns={df.columns[0]: 'Col1'
+                           , df.columns[1]: 'Col2'
+                           , df.columns[2]: 'Col3'
+                           , df.columns[3]: 'Col4'
+                           , df.columns[4]: 'Col5'
+                           , df.columns[5]: 'Col6'
+                           , df.columns[6]: 'Col7'
+                           , df.columns[7]: 'Col8'
+                           , df.columns[8]: 'Col9'
+                           , df.columns[9]: 'Col10'
+                           , df.columns[10]: 'Col11'
+                           , df.columns[11]: 'Col12'
+                           , df.columns[12]: 'Col13'
+                           , df.columns[13]: 'Col14'
+                           , df.columns[14]: 'Col15'
+                           , df.columns[15]: 'Col16'
+                           , df.columns[16]: 'Col17' 
+                           })
+    header_2 = df['Col1'][0]
+    header_list_1 = [df['Col1'][1]
+                     , df['Col2'][1] #B
+                     , df['Col3'][1] #C
+                     , df['Col4'][1] #D
+                     , df['Col5'][1] #E
+                     , df['Col6'][1] #F
+                     , df['Col7'][1] #G
+                     , df['Col8'][1] #H
+                     , df['Col9'][1] #I
+                     , df['Col10'][1] #J
+                     , df['Col11'][1] #K
+                     , df['Col12'][1] #L
+                     , df['Col13'][1] #M
+                     , df['Col14'][1] #N
+                     , df['Col15'][1] #O
+                     , df['Col16'][1] #P
+                     , df['Col17'][1] #Q
+                    ]
+    header_list_2 = [None #A
+                     , df['Col2'][2] #B
+                     , df['Col3'][2] #C
+                     , df['Col4'][2] #D
+                     , df['Col5'][2] #E
+                     , df['Col6'][2] #F
+                     , df['Col7'][2] #G
+                     , df['Col8'][2] #H
+                     , df['Col9'][2] #I
+                     , df['Col10'][2] #J
+                     , df['Col11'][2] #K
+                     , df['Col12'][2] #L
+                     , df['Col13'][2] #M
+                     , df['Col14'][2] #N
+                     , df['Col15'][2] #O
+                     , df['Col16'][2] #P
+                     , df['Col17'][2] #Q
+                    ]
+    header_list_3 = [None #A
+                     , df['Col2'][3] #B
+                     , df['Col3'][3] #C
+                     , df['Col4'][3] #D
+                     , df['Col5'][3] #E
+                     , df['Col6'][3] #F
+                     , df['Col7'][3] #G
+                     , df['Col8'][3] #H
+                     , df['Col9'][3] #I
+                     , df['Col10'][3] #J
+                     , df['Col11'][3] #K
+                     , df['Col12'][3] #L
+                     , df['Col13'][3] #M
+                     , df['Col14'][3] #N
+                     , df['Col15'][3] #O
+                     , df['Col16'][3] #P
+                     , df['Col17'][3] #Q
+                    ]
+    df=df.dropna(subset=['Col3']).reset_index(drop=True)
+    df['rent_step_base'] = df.apply(lambda x: flag_box(x['Col3'], x['Col2']), axis=1)
+    df['rent_step_header'] = df.apply(lambda x: flag_box(x['Col2'], x['Col17']), axis=1)
+    df['Header_Check'] = df.apply(lambda x: check_header_ten_sch(x['Col17']), axis=1)
+    df['BOX'] = df.apply(lambda x: flag_box(x['Col1'], x['Col9']), axis=1)
+    # wirte excel
+    header_format_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':14
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A1:Q1", header_1, header_format_1)
+    header_format_2 = workbook.add_format({'font_color': dark_gray_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                     })
+    worksheet.merge_range("A2:Q2", header_2, header_format_2)
+    header_format_3 = workbook.add_format({'font_color': white_color
+                                    , 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':11
+                                    , 'align':'center'
+                                     })
+    for col in range(17):
+        try:
+            str(header_list_1[col])
+            worksheet.write(2, col, header_list_1[col], header_format_3)
+        except:
+            worksheet.write_blank(2, col, None, header_format_3)
+        try:
+            str(header_list_2[col])
+            worksheet.write(3, col, header_list_2[col], header_format_3)
+        except:
+            worksheet.write_blank(3, col, None, header_format_3)
+        try:
+            str(header_list_3[col])
+            worksheet.write(4, col, header_list_3[col], header_format_3)
+        except:
+            worksheet.write_blank(4, col, None, header_format_3)
+    worksheet.merge_range(5, 0, 5, 17, '', header_format_2)
+    worksheet.set_row(5,7.5)
+    row_write_val = 6
+    row_val_format_header = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_header_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_header_date = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'num_format':14
+                                    , 'valign':'vcenter'
+                                     })
+    rent_step_header_1 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'center'
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'valign':'vcenter'
+                                     })
+    rent_step_header_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'center'
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'valign':'vcenter'
+                                     })
+    rent_step_header_3 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'text_wrap':False
+                                    , 'valign':'vcenter'
+                                     })
+    rent_step_base_1 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'valign':'vcenter'
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    rent_step_base_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'valign':'vcenter'
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    rent_step_base_date = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    , 'valign':'vcenter'
+                                    ,'num_format':14
+                                     })
+    box_title_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':14
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    box_title_2 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'center'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':14
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    box_base_1 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':False
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    box_base_3 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':False
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    box_base_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':10
+                                     })
+    box_total_1 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                     })
+    box_total_2 = workbook.add_format({'font_color': black_color
+                                    , 'bold':True #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':10
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                     })
+    row_write_val = 6
+    for i in range(1, df.shape[0]):
+        if df['Header_Check'][i] == 1: # row_val_format_header
+            worksheet.write_string(row_write_val, 0, df['Col1'][i],row_val_format_header)
+            worksheet.write_string(row_write_val, 1, df['Col2'][i],row_val_format_header)
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],row_val_format_header)
+            worksheet.write_string(row_write_val, 3, df['Col4'][i],row_val_format_header)
+            worksheet.write_number(row_write_val, 4, df['Col5'][i],row_val_format_header)
+            worksheet.write_datetime(row_write_val, 5, df['Col6'][i],row_val_format_header_date)
+            worksheet.write_datetime(row_write_val, 6, df['Col7'][i],row_val_format_header_date)
+            worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 8, df['Col9'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 9, df['Col10'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 10, df['Col11'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 11, df['Col12'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 12, df['Col13'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_header_2)
+            worksheet.write_number(row_write_val, 16, df['Col17'][i],row_val_format_header_2)
+            row_write_val = row_write_val + 1
+            worksheet.set_row(row_write_val,7.5)
+            row_write_val = row_write_val + 1
+        elif df['rent_step_header'][i] == 1:
+            worksheet.write_string(row_write_val, 1, df['Col2'][i],rent_step_header_1)
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 3, df['Col4'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 5, df['Col6'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 6, df['Col7'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 7, df['Col8'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 8, df['Col9'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 9, df['Col10'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 10, df['Col11'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 11, df['Col12'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 12, df['Col13'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 13, df['Col14'][i],rent_step_header_2)
+            worksheet.write_string(row_write_val, 14, df['Col15'][i],rent_step_header_2)
+            row_write_val = row_write_val + 1
+        elif df['BOX'][i] == 1:
+            worksheet.set_row(row_write_val-1,14.5)
+            if df['Col1'][i] == 'Occupancy Summary':
+                worksheet.write_string(row_write_val, 0, 'Occupancy Summary',rent_step_header_3)
+                worksheet.write_blank(row_write_val, 1, None, rent_step_header_1)
+                worksheet.write_string(row_write_val, 2, 'Area',box_title_2)
+                worksheet.write_string(row_write_val, 3, 'Percentage',box_title_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Occupied Area':
+                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Vacant Area':
+                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total': #box_total_1
+                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
+                worksheet.write_blank(row_write_val, 1, None, box_total_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
+                row_write_val = row_write_val + 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total Occupied Area':
+                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Grand Total':
+                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
+                worksheet.write_blank(row_write_val, 1, None, box_total_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
+                row_write_val = row_write_val + 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total Vacant Area':
+                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+        elif df['rent_step_base'][i] == 1:
+            next_rent_base = 0
+            try:
+                if df['rent_step_base'][i+1] != 1:
+                    next_rent_base = 1
+            except:
+                pass
+            try:
+                if df['BOX'][i+1] == 1:
+                    next_rent_base = 1
+            except:
+                pass
+            worksheet.write_string(row_write_val, 2, df['Col3'][i],rent_step_base_1)
+            worksheet.write_string(row_write_val, 3, df['Col4'][i],rent_step_base_1)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],rent_step_base_1)
+            worksheet.write_string(row_write_val, 5, df['Col6'][i],rent_step_base_1)
+            worksheet.write_number(row_write_val, 6, df['Col7'][i],rent_step_base_2)
+            worksheet.write_datetime(row_write_val, 7, df['Col8'][i],rent_step_base_date)
+            worksheet.write_datetime(row_write_val, 8, df['Col9'][i],rent_step_base_date)
+            worksheet.write_number(row_write_val, 9, df['Col10'][i],rent_step_base_2)
+            worksheet.write_number(row_write_val, 10, df['Col11'][i],rent_step_base_2)
+            worksheet.write_number(row_write_val, 11, df['Col12'][i],rent_step_base_2)
+            worksheet.write_number(row_write_val, 12, df['Col13'][i],rent_step_base_2)
+            worksheet.write_number(row_write_val, 13, df['Col14'][i],rent_step_base_2)
+            worksheet.write_number(row_write_val, 14, df['Col15'][i],rent_step_base_2)
+            row_write_val = row_write_val + 1
+            if next_rent_base == 1:
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+        else:
+            pass
+    column_width_list = [
+        [40.27, 0, 0, worksheet]        
+        ,[12.7, 1, 1, worksheet]
+        ,[40.27, 2, 2, worksheet]
+        ,[17.55, 3, 3, worksheet]
+        ,[12.7, 4, 15, worksheet]
+        ,[17.55, 16, 16, worksheet]
+    ]
+    for i in column_width_list:
+        try:
+            i[3].set_column(i[1],i[2], i[0])
+        except:
+            pass ## Tenancy Schedule
+    worksheet.set_landscape()
+    worksheet.set_margins(.5,.5,.5,.5)
+    worksheet.repeat_rows(0, 4)
+    worksheet.print_area(0,0, row_write_val - 1, 16)
+    worksheet.set_page_view(2)
+    total_pages = max(math.ceil(row_write_val/50), 1)
+    worksheet.fit_to_pages(1, total_pages)
+    return df
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
 # -----------------------------------------------------------------
