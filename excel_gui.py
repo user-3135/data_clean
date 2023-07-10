@@ -5,6 +5,7 @@ import excel_file
 import excel_file_2
 import excel_file_3
 import excel_file_4 as writer
+import excel_6 as new_writer
 import comb
 import xlsxwriter as xl
 import openpyxl
@@ -23,27 +24,39 @@ except:
 try:
     bs_df = pd.read_excel(uploaded_file_2, sheet_name = 'BS') #BS
 except:
-    st.write('Balance Sheet Error')
+    st.write('Balance Sheet Error - Verify the sheet name is BS')
 try:
     is_df = pd.read_excel(uploaded_file_2, sheet_name = 'IS') #BS
 except:
-    st.write('Income Statement Error')
+    st.write('Income Statement Error - Verify the sheet name is IS')
 try:
     actual_budget = pd.read_excel(uploaded_file_2, sheet_name = 'Actual-Budget')
 except:
-    st.write('Actual - Budget Error')
+    st.write('Verify that the Actual-Budget sheet is called Actual-Budget with no spaces')
 try:
     data_ar_detail = pd.read_excel(uploaded_file_2, sheet_name = 'AR Detail')
 except:
-    st.write('AR Detail Error')
+    st.write('AR Detail Error - Ensure the sheet name is AR Detail')
 try:
     data_12_month = pd.read_excel(uploaded_file_2, sheet_name = 'IS 12 Month Actual')
 except:
-    st.write('IS 12 Month Actual')
+    try:
+        data_12_month = pd.read_excel(uploaded_file_2, sheet_name = 'IS 12 Month')
+    except:
+        try:
+            data_12_month = pd.read_excel(uploaded_file_2, sheet_name = ' IS 12 Month')
+        except:
+            st.write('IS 12 Month Actual - Ensure the sheet name is IS 12 Month Actual')
 try:    
     data_ten_sched = pd.read_excel(uploaded_file_2, sheet_name = 'TenSched1')
 except:
-    st.write('Ten Sched Error')
+    try:
+        data_ten_sched = pd.read_excel(uploaded_file_2, sheet_name = 'TenSched 1')
+    except:
+        try:
+            data_ten_sched = pd.read_excel(uploaded_file_2, sheet_name = 'TenSche1')
+        except:
+            st.write('Ten Sched Error - Ensure the sheet name is TenSched1')
 # ------------------------------------
 try:
     data_payment_register = pd.read_excel(uploaded_file_2, sheet_name = 'Pymnt Register')
@@ -56,7 +69,13 @@ except:
 try:
     data_mth_gl = pd.read_excel(uploaded_file_2, sheet_name = 'MTH GL')
 except:
-    st.write('MTH GL Error')
+    try:
+        data_mth_gl = pd.read_excel(uploaded_file_2, sheet_name = 'MTHGL')
+    except:
+        try:
+            data_mth_gl = pd.read_excel(uploaded_file_2, sheet_name = ' GL')
+        except:
+            st.write('MTH GL Error - Ensure the sheet name is MTH GL')
 try:    
     je_register_data = pd.read_excel(uploaded_file_2, sheet_name = 'JE Register')
 except:
@@ -80,85 +99,114 @@ try:
     #----------------------------------------------------------------------------------- 2
     # procs
     try:
-        h = writer.JE_REGISTER_SHEET_2(workbook_not_func, je_register_data, je_register_worksheet)
-    except:
-        st.write('error writing JE Register in Excel')
-    try:
-        f = writer.mnth_gl_sheet_2(workbook_not_func, data_mth_gl, mnth_gl_worksheet) ##mnth_gl_sheet
-    except:
-        st.write('error writing Month General Ledger in Excel')
-    try:
-        e = writer.ap_detail_sheet_def_2(workbook_not_func, data_ap_detail, ap_detail_sheet)
+        h = new_writer.JE_REGISTER_SHEET(workbook_not_func, je_register_data, je_register_worksheet)
     except:
         try:
-            e = writer.ap_detail_sheet_def(workbook_not_func, data_ap_detail, ap_detail_sheet)
+            h = writer.JE_REGISTER_SHEET_2(workbook_not_func, je_register_data, je_register_worksheet)
+            st.write('used old JE Register Sheet')
         except:
-            st.write('error writing Month AP Detail in Excel')
+            st.write('error writing JE Register in Excel')
+    try:
+        f = new_writer.mnth_gl_sheet(workbook_not_func, data_mth_gl, mnth_gl_worksheet) ##mnth_gl_sheet
+    except:
+        try:
+            f = writer.mnth_gl_sheet_2(workbook_not_func, data_mth_gl, mnth_gl_worksheet)
+            st.write('used old Mnth GL Function')
+        except:
+            st.write('error writing Month General Ledger in Excel')
+    try:
+        e = new_writer.ap_detail_sheet_def_2(workbook_not_func, data_ap_detail, ap_detail_sheet)
+    except:
+        try:
+            e = writer.ap_detail_sheet_def_2(workbook_not_func, data_ap_detail, ap_detail_sheet)
+            st.write('used an old AP Detail Sheet')
+        except:
+            try:
+                e = writer.ap_detail_sheet_def(workbook_not_func, data_ap_detail, ap_detail_sheet)
+            except:
+                st.write('error writing Month AP Detail in Excel')
     try: #payment_register_sheet_2
-        d = writer.payment_register_sheet_2(workbook_not_func, data_payment_register, worksheet_pay_reg)
+        d = new_writer.payment_register_sheet_2(workbook_not_func, data_payment_register, worksheet_pay_reg)
     except:
         try:
-            d = writer.payment_register_sheet(workbook_not_func, data_payment_register, worksheet_pay_reg)
+            d = writer.payment_register_sheet_2(workbook_not_func, data_payment_register, worksheet_pay_reg)
+            st.write('used an old payment register sheet')
         except:
-            st.write('error writing Month Payment Register in Excel')
+            try:
+                d = writer.payment_register_sheet(workbook_not_func, data_payment_register, worksheet_pay_reg)
+            except:
+                st.write('error writing Month Payment Register in Excel')
 #----------------------------------------------------------------------------------- 2
     if 1 == 1:
         # procs
         try:
-            a = writer.twelve_month_actual_budget(workbook_not_func, data_12_month, worksheet_12_mo_actual)
-        except:
-            print(5)
-        try:
-            b = writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
-        except:
-            print(6)
-        try: #aging_detail_2
-            c = writer.aging_detail_2(workbook_not_func, data_ar_detail, aging_detail_sheet)
+            a1 = new_writer.twelve_month_actual_budget_v2(workbook_not_func, data_12_month, worksheet_12_mo_actual)
         except:
             try:
-                c = writer.aging_detail(workbook_not_func, data_ar_detail, aging_detail_sheet)
+                a1 = writer.twelve_month_actual_budget(workbook_not_func, data_12_month, worksheet_12_mo_actual)
+                st.write('used an old version of the 12 month actual budget')
             except:
-                st.write('error writing Aging Detail in Excel')
+                st.write('error 12 month actual budget')
+        #-----------------------------------------------------------
+        try:
+            b1 = new_writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
+        except:
+            try:
+                b1 = writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
+                st.write('used an old version of the ten sched')
+            except:
+                st.write('ten sched error')
+        try:
+            c1 = new_writer.aging_detail_2(workbook_not_func, data_ar_detail, aging_detail_sheet)
+        except:
+            try: #aging_detail_2
+                c1 = writer.aging_detail_2(workbook_not_func, data_ar_detail, aging_detail_sheet)
+            except:
+                try:
+                    c1 = writer.aging_detail(workbook_not_func, data_ar_detail, aging_detail_sheet)
+                except:
+                    st.write('error writing Aging Detail in Excel')
     #----------------------------------------------------------------------------------- 3
     try:
-        aa = writer.create_xl_cf(workbook_not_func, cash_flow_df, cf_worksheet_func)
+        aa = new_writer.create_xl_cf_v2(workbook_not_func, cash_flow_df, cf_worksheet_func)
     except:
-        print(8)
-    try:
-        ba = writer.create_xl_tb(workbook_not_func, tb_df_1, tb_worksheet_func)
-    except:
-        print(9)
-    try:
-        ca = writer.create_xl_balance_sheet(workbook_not_func, bs_df, bs_wb)
-    except:
-        print(10)
-    try:
-        fa = writer.budget_comp_sheet_creation(workbook_not_func, actual_budget, act_bud_worksheet_func)
-    except:
-        print(11)
-    try:
-        writer.income_statement(workbook_not_func, is_df, Income_Statement_wb)
-    except:
-        print(12)
-    column_width_list = [
-                [71, 0, 0, Income_Statement_wb]
-                ,[17.7, 1, 2, Income_Statement_wb]
-                ,[42.3,0,0, worksheet_12_mo_actual]
-                ,[11.9,1,16, worksheet_12_mo_actual]
-                ,[58.8, 0, 0, bs_wb]
-                ,[17.9, 1, 3, bs_wb]
-                ,[71, 0, 0, cf_worksheet_func ] ## cashflow
-                ,[17.7, 1, 2, cf_worksheet_func] ## cashflow
-                ,[38.7, 0, 0, tb_worksheet_func] ## Trial Balance
-                ,[16.4, 1, 4, tb_worksheet_func] ## Trial Balance
-                ,[12.7, 0, 16, worksheet_tenancy_sched] ## Tenancy Schedule
-    ]
-    for i in column_width_list:
         try:
-            i[3].set_column(i[1],i[2], i[0])
+            aa = writer.create_xl_cf(workbook_not_func, cash_flow_df, cf_worksheet_func)
+            st.write('used an old version of the Cash Flow DF')
         except:
-            pass
-    
+            st.write('error writing the Cash Flow Sheet')
+    try:
+        ba = new_writer.create_xl_tb_v2(workbook_not_func, tb_df_1, tb_worksheet_func)
+    except:
+        try:
+            ba = writer.create_xl_tb(workbook_not_func, tb_df_1, tb_worksheet_func)
+            st.write('used an old trial balance sheet')
+        except:
+            st.write('error writing the trial balance sheet')
+    try:
+        ca = new_writer.create_xl_balance_sheet_v2(workbook_not_func, bs_df, bs_wb)
+    except:
+        try:
+            ca = writer.create_xl_balance_sheet(workbook_not_func, bs_df, bs_wb)
+            st.write('used an old Balance Sheet file')
+        except:
+            st.write('error writing the balance sheet')
+    try:
+        fa = new_writer.budget_comp_sheet_creation_v2(workbook_not_func, actual_budget, act_bud_worksheet_func)
+    except:
+        try:
+            fa = writer.budget_comp_sheet_creation(workbook_not_func, actual_budget, act_bud_worksheet_func)
+            st.write('used an old budget comp file')
+        except:
+            st.write('error writing the budget comp sheet')
+    try:
+        new_writer.income_statement_v2(workbook_not_func, is_df, Income_Statement_wb)
+    except:
+        try:
+            writer.income_statement(workbook_not_func, is_df, Income_Statement_wb)
+            st.write('used an old file to write the income statement')
+        except:
+            st.write('error writing the income statement sheet')
     workbook_not_func.close()
 except: 
     st.write('error in base')
