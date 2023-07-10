@@ -152,7 +152,7 @@ try:
                 st.write('error 12 month actual budget')
         #-----------------------------------------------------------
         try:
-            b1 = new_writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
+            b1 = new_writer.ten_sched_1_v2(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
         except:
             try:
                 b1 = writer.ten_sched_1(workbook_not_func, data_ten_sched, worksheet_tenancy_sched)
