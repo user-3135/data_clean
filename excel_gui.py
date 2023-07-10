@@ -61,7 +61,10 @@ except:
 try:
     data_payment_register = pd.read_excel(uploaded_file_2, sheet_name = 'Pymnt Register')
 except:
-    st.write('Pymnt Register Error')
+    try:
+        data_payment_register = pd.read_excel(uploaded_file_2, sheet_name = 'Payment Register') # Payment Register
+    except:
+        st.write('Pymnt Register Error')
 try:
     data_ap_detail = pd.read_excel(uploaded_file_2, sheet_name = 'AP Detail')
 except:
