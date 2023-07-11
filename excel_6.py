@@ -2517,20 +2517,20 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     data_format_1_wrap = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'text_wrap':True
                                     })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                         })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2586,7 +2586,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -2599,7 +2599,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -3742,7 +3742,7 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3771,7 +3771,7 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44})
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'})
     total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -3781,7 +3781,7 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3793,7 +3793,7 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3806,12 +3806,12 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     bottom_line_format = workbook.add_format({'font_color': black_color
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     for i in range(4, df.shape[0]):
         if df['header'][i] == 1:
