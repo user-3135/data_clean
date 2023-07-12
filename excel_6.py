@@ -2238,7 +2238,9 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                      })
     for i in range(4, df.shape[0]):
         new_row_needed = 0
-        if df['Header_Check'][i] == 1:
+        if df['Col1'][i] == 'AL OF ALL':
+            pass
+        elif df['Header_Check'][i] == 1:
             try:
                 next_total_val = df['Total_Check'][i-1]
             except:
