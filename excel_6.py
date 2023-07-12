@@ -2580,7 +2580,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     data_format_1_wrap = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2593,7 +2593,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                         })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2649,7 +2649,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -2662,7 +2662,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
