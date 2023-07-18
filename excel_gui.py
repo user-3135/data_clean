@@ -228,13 +228,13 @@ try:
                   ]
     wb_add = openpyxl.load_workbook(uploaded_file_2)
     final_output = BytesIO()
-    for i in vals_to_rip:    
-        target_sheet = wb_base.create_sheet(i)
-        try:
-            source_sheet = wb_add[i]
-            comb.copy_sheet(source_sheet, target_sheet)
-        except:
-            print(i)
+    #for i in vals_to_rip:    
+    #    target_sheet = wb_base.create_sheet(i)
+    #    try:
+    #        source_sheet = wb_add[i]
+    #        comb.copy_sheet(source_sheet, target_sheet)
+    #    except:
+    #        print(i)
         
     wb_base.save(final_output)
 except:
