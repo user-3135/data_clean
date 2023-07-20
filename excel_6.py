@@ -227,7 +227,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -235,7 +235,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                      })
     row_val_format_total_item_num = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -243,7 +243,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -253,7 +253,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'top':1
                                     , 'border_color':black_color
                                      })
@@ -263,7 +263,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     , 'top':1
                                     , 'bottom':1
@@ -284,7 +284,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     , 'border':6
                                     , 'top':0
@@ -309,7 +309,7 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                     , 'bottom':1
                                     })
@@ -342,7 +342,9 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
             next_row_val = income_statement_1['Col1'][i + 1]
         except:
             next_row_val = ''
-        if income_statement_1['Col1'][i] == 'TOTAL NET INCOME':
+        if income_statement_1['Col1'][i] == 'AL OF ALL':
+            pass
+        elif income_statement_1['Col1'][i] == 'TOTAL NET INCOME':
             Income_Statement.write_string(row_write_val, 0, income_statement_1['Col1'][i], row_val_format_header_3)
             Income_Statement.write_number(row_write_val, 1, income_statement_1['Col2'][i], row_val_format_total_item_num_3)
             Income_Statement.write_number(row_write_val, 2, income_statement_1['Col4'][i], row_val_format_total_item_num_3)
@@ -453,13 +455,13 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
             pass
     Income_Statement.set_portrait()
     Income_Statement.set_margins(.5,.5,.5,.5)
-    Income_Statement.repeat_rows(0, 5)
+    Income_Statement.repeat_rows(0, 6)
     Income_Statement.print_area(0,0, row_write_val, 2)
     Income_Statement.set_page_view(2)
     total_pages = max(math.ceil(row_write_val/50), 1)
     Income_Statement.fit_to_pages(1, total_pages)
     return income_statement_1
-# ----------------------------------------------------------------- new stuff
+# ----------------------------------------------------------------- budget comp
 def budget_comp_sheet_creation_v2(workbook, df, worksheet):
     prop_name = df.columns[0]
     def rename_prop(property_name):
@@ -740,7 +742,8 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
     worksheet.merge_range(5, 0, 5, 9, '', header_format_2)
     worksheet.set_row(5,7.5)
     row_write_val = 6
-    for i in range(4, df.shape[0]):
+    for i in range(3, df.shape[0]):
+        #print(df['Col1'][i])
         if df['Col1'][i] == 'TOTAL NET INCOME':
             if 1 == 1:
                 worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom_2)
@@ -758,10 +761,6 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom_2)
                 except:
                     worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent_top_bottom_2)
-                try:
-                    worksheet.write_string(row_write_val, 9, df['Col10'][i], row_val_format_header_top_bottom_2)
-                except:
-                    worksheet.write_blank(row_write_val, 9, '', row_val_format_header_top_bottom_2)
                 row_write_val = row_write_val + 1
         elif df['Header_Check'][i] == 1:
             try:
@@ -794,10 +793,6 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom)
                 except:
                     worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent_top_bottom)
-                try:
-                    worksheet.write_string(row_write_val, 9, df['Col10'][i], row_val_format_header_top_bottom)
-                except:
-                    worksheet.write_blank(row_write_val, 9, '', row_val_format_total_item_num_top_bottom)
                 row_write_val = row_write_val + 1
             elif df['Col1'][i] == 'AL OF ALL':
                 pass
@@ -823,13 +818,10 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom)
                 except:
                     worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent_top_bottom)
-                try:
-                    worksheet.write_string(row_write_val, 9, df['Col10'][i], row_val_format_header_top_bottom)
-                except:
-                    worksheet.write_blank(row_write_val, 9, '', row_val_format_total_item_num_top_bottom)
                 row_write_val = row_write_val + 1
-                worksheet.set_row(row_write_val,7.5)
-                row_write_val = row_write_val + 1
+                if df['Col1'][i] != 'TOTAL OPERATING EXPENSES':
+                    worksheet.set_row(row_write_val,7.5)
+                    row_write_val = row_write_val + 1
             else:
                 if df['Total_Check'][i] == 1:
                     if next_total_val == 1:
@@ -848,10 +840,6 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                             worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
                         except:
                             worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent)
-                        try:
-                            worksheet.write_string(row_write_val, 9, df['Col10'][i], row_val_format_header)
-                        except:
-                            worksheet.write_blank(row_write_val, 9, '', row_val_format_total_item_num)
                         row_write_val = row_write_val + 1
                     else:
                         if df['Nan_Var_Check'][i] >= 0:
@@ -870,10 +858,6 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                                 worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
                             except:
                                 worksheet.write_number(row_write_val, 8, 0,row_val_format_total_item_percent)
-                            try:
-                                worksheet.write_string(row_write_val, 9, df['Col10'][i], row_val_format_header)
-                            except:
-                                worksheet.write_blank(row_write_val, 9, '', row_val_format_total_item_num)
                             row_write_val = row_write_val + 1
                             if next_header_val == 1:
                                 new_row_needed = 1
@@ -895,7 +879,7 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                             else:
                                 row_val_check = row_val_check + 1
                         if value_needed == 1:
-                            worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
+                            #worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
                             row_write_val = row_write_val + 1
                     else:
                         pass
@@ -908,6 +892,7 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
             else:
                 pass
         else:
+            #print(df['Col1'][i])
             if df['Nan_Var_Check'][i] == 2:
                 pass
             else:
@@ -936,12 +921,13 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
     worksheet.set_column(1,8,15)
     worksheet.print_area(0,0, row_write_val, 9)
     worksheet.set_margins(.5,.5,.5,.5)
-    worksheet.repeat_rows(0, 6)
+    worksheet.repeat_rows(0, 5)
     num_pages_budget_1 = math.ceil(row_write_val/65)
     worksheet.fit_to_pages(1, num_pages_budget_1)
     worksheet.set_landscape()
     worksheet.set_page_view(2)
     return df
+# ----------------------------------------------------------------- new stuff create_xl_balance_sheet_v2
 def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
     prop_name_bs_change = bal_sheet_1.columns[0]
     def rename_prop(property_name):
@@ -1061,7 +1047,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1069,7 +1055,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                      })
     row_val_format_total_item_num = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1077,7 +1063,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1087,7 +1073,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'top':1
                                     , 'border_color':black_color
                                      })
@@ -1106,7 +1092,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                      })
@@ -1127,7 +1113,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border':6
                                     , 'left':0
                                     , 'right':0
@@ -1144,11 +1130,30 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                                      })
     row_val_format_total_item_num_equity_top = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_sub_item_equity_top_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_item_num_equity_top_2 = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                     })
@@ -1222,6 +1227,12 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                 BS_Change_Sheet.set_row(row_write_val,7.5)
                 row_write_val = row_write_val + 1
             elif bal_sheet_1['Col1'][i] == 'TOTAL EQUITY':
+                BS_Change_Sheet.write_string(row_write_val, 0, bal_sheet_1['Col1'][i], row_val_format_sub_item_equity_top)
+                BS_Change_Sheet.write_number(row_write_val, 1, bal_sheet_1['Col2'][i],row_val_format_total_item_num_equity_top)
+                BS_Change_Sheet.write_number(row_write_val, 2, bal_sheet_1['Col3'][i],row_val_format_total_item_num_equity_top)
+                BS_Change_Sheet.write_number(row_write_val, 3, bal_sheet_1['Col4'][i],row_val_format_total_item_num_equity_top)
+                row_write_val = row_write_val + 1
+            elif bal_sheet_1['Col1'][i] == 'TOTAL LIABILITIES  EQUITY':
                 BS_Change_Sheet.write_string(row_write_val, 0, bal_sheet_1['Col1'][i], row_val_format_header_equity)
                 BS_Change_Sheet.write_number(row_write_val, 1, bal_sheet_1['Col2'][i],row_val_format_sub_item_num_equity)
                 BS_Change_Sheet.write_number(row_write_val, 2, bal_sheet_1['Col3'][i],row_val_format_sub_item_num_equity)
@@ -1292,17 +1303,19 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
             else:
                 pass
         else:
+            #print(bal_sheet_1['Col1'][i])
             try:
                 next_val = bal_sheet_1['Col1'][i + 1]
             except:
                 next_val = ''
             if bal_sheet_1['Nan_Var_Check'][i] == 2:
-                print(bal_sheet_1['Col1'][i])
+                #print(bal_sheet_1['Col1'][i])
+                pass
             elif next_val == 'TOTAL EQUITY':
-                BS_Change_Sheet.write_string(row_write_val, 0, bal_sheet_1['Col1'][i],row_val_format_sub_item_equity_top)
-                BS_Change_Sheet.write_number(row_write_val, 1, bal_sheet_1['Col2'][i],row_val_format_total_item_num_equity_top)
-                BS_Change_Sheet.write_number(row_write_val, 2, bal_sheet_1['Col3'][i],row_val_format_total_item_num_equity_top)
-                BS_Change_Sheet.write_number(row_write_val, 3, bal_sheet_1['Col4'][i],row_val_format_total_item_num_equity_top)
+                BS_Change_Sheet.write_string(row_write_val, 0, bal_sheet_1['Col1'][i],row_val_format_sub_item_equity_top_2)
+                BS_Change_Sheet.write_number(row_write_val, 1, bal_sheet_1['Col2'][i],row_val_format_total_item_num_equity_top_2)
+                BS_Change_Sheet.write_number(row_write_val, 2, bal_sheet_1['Col3'][i],row_val_format_total_item_num_equity_top_2)
+                BS_Change_Sheet.write_number(row_write_val, 3, bal_sheet_1['Col4'][i],row_val_format_total_item_num_equity_top_2)
                 row_write_val = row_write_val + 1
             else:
                 BS_Change_Sheet.write_string(row_write_val, 0, bal_sheet_1['Col1'][i],row_val_format_sub_item)
@@ -1311,7 +1324,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
                 BS_Change_Sheet.write_number(row_write_val, 3, bal_sheet_1['Col4'][i],row_val_format_sub_item_num)
                 row_write_val = row_write_val + 1
     column_width_list = [
-                [38.7, 0, 0, BS_Change_Sheet] ## Trial Balance
+                [50, 0, 0, BS_Change_Sheet] ## Trial Balance
                 ,[18, 1, 4, BS_Change_Sheet] ## Trial Balance
     ]
     for i in column_width_list:
@@ -1327,6 +1340,7 @@ def create_xl_balance_sheet_v2(workbook, bal_sheet_1, BS_Change_Sheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     BS_Change_Sheet.fit_to_pages(1, total_pages)
     return bal_sheet_1
+# ----------------------------------------------------------------- new stuff create_xl_tb_v2
 def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -1425,7 +1439,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1433,7 +1447,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                      })
     row_val_format_total_item_num = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -1441,7 +1455,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -1451,7 +1465,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'top':1
                                     , 'border_color':black_color
                                      })
@@ -1470,7 +1484,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                     })
@@ -1492,13 +1506,28 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border':6
                                     , 'top':0
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
                                     })
+    def rename_prop(property_name):
+        try:
+            property_name = property_name('(', 1)[0]
+        except:
+            try:
+                name = ''
+                for i in property_name:
+                    if i == '(':
+                        break
+                    else:
+                        name = name + i
+                property_name = name
+            except:
+                pass
+        return property_name
     prop_name_tb = trail_balance_df.columns[0]
     try:
         prop_name_tb = rename_prop(prop_name_tb)
@@ -1577,7 +1606,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
             i[3].set_column(i[1],i[2], i[0])
         except:
             pass
-    Trial_Balance.set_landscape()
+    Trial_Balance.set_portrait()
     Trial_Balance.set_margins(.5,.5,.5,.5)
     Trial_Balance.repeat_rows(0, 6)
     Trial_Balance.print_area(0,0, row_write_val, 4)
@@ -1585,6 +1614,7 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
     total_pages = max(math.ceil(row_write_val/50), 1)
     Trial_Balance.fit_to_pages(1, total_pages)
     return trail_balance_df
+# ----------------------------------------------------------------- new stuff create_xl_cf_v2
 def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
     prop_name_cf_1 = cash_flow_1_df.columns[0]
     try:
@@ -1846,21 +1876,19 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
     cash_flow_1_df['Total_Check'] = cash_flow_1_df.apply(lambda x: flag_total_rows(x['Col1']), axis=1)
     cash_flow_1_df['Header_Check'] = cash_flow_1_df.apply(lambda x: flag_header_rows(x['Col1']), axis=1)
     # write
-    Cash_Flow_1.merge_range("A1:E1", prop_name_cf_1, header_format_1)
-    Cash_Flow_1.merge_range("A2:E2", header_2_cf_1, header_format_1)
-    Cash_Flow_1.merge_range("A3:E3", header_3_cf_1, header_format_2)
-    Cash_Flow_1.merge_range("A4:E4", header_4_cf_1, header_format_2)
-    header_cols = [ 'Month to Date', 'Percentage Var', 'Year to Date', 'Percentage Var']
-    for row in range(5):
+    Cash_Flow_1.merge_range("A1:C1", prop_name_cf_1, header_format_1)
+    Cash_Flow_1.merge_range("A2:C2", header_2_cf_1, header_format_1)
+    Cash_Flow_1.merge_range("A3:C3", header_3_cf_1, header_format_2)
+    Cash_Flow_1.merge_range("A4:C4", header_4_cf_1, header_format_2)
+    header_cols = [ 'Month to Date', 'Year to Date']
+    for row in range(3):
         if row == 0:
             Cash_Flow_1.write_blank(4, row, '', header_format_3)
             Cash_Flow_1.write_blank(5, row, '', header_format_3)
         else:
             Cash_Flow_1.write_string(4, row, header_cols[row - 1], header_format_3)
     Cash_Flow_1.write_formula(5, 1, '=+TEXT(RIGHT(A3,8),"mmmm yyyy")', header_format_3)
-    Cash_Flow_1.write_formula(5, 3, '=+B6', header_format_3)
-    Cash_Flow_1.write_blank(5, 2, '', header_format_3)
-    Cash_Flow_1.write_blank(5, 4, '', header_format_3)
+    Cash_Flow_1.write_formula(5, 2, '=+B6', header_format_3)
     Cash_Flow_1.merge_range(6, 0, 6, 4, '', header_format_2)
     Cash_Flow_1.set_row(6,7.5)
     row_write_val = 7
@@ -1901,40 +1929,30 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
                 if cash_flow_1_df['Col1'][i] == 'TOTAL NET INCOME':
                     Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_num_total_net_income)
                     Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_total_net_income)
-                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i]/100, row_val_format_total_item_num_total_net_income_percent)
-                    Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_total_net_income)
-                    Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i]/100, row_val_format_total_item_num_total_net_income_percent)
+                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_total_net_income)
                     row_write_val = row_write_val + 1
                 else:
                     Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_2)
                     Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_2)
-                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i]/100, row_val_format_total_item_num_2_percent)
-                    Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_2)
-                    Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i]/100, row_val_format_total_item_num_2_percent)
+                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_2)
                     row_write_val = row_write_val + 1
             else:
                 if cash_flow_1_df['Total_Check'][i] == 1:
                     if cash_flow_1_df['Col1'][i + 1] == 'TOTAL NET INCOME': # row_val_format_total_item_num_prior_net_income_percent
                         Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_prior_net_income)
-                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i]/100, row_val_format_total_item_num_prior_net_income)
-                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i], row_val_format_total_item_num_prior_net_income_percent)
-                        Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i]/100, row_val_format_total_item_num_prior_net_income)
-                        Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i], row_val_format_total_item_num_prior_net_income_percent)
+                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_prior_net_income)
+                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_prior_net_income)
                         row_write_val = row_write_val + 1
                     elif next_total_val == 1:
                         Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header)
-                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num) # row_val_format_total_item_num_percent
-                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i]/100, row_val_format_total_item_num_percent)
-                        Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num)
-                        Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i]/100, row_val_format_total_item_num_percent)
+                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num)
+                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num)
                         row_write_val = row_write_val + 1
                     else:
                         if cash_flow_1_df['Nan_Var_Check'][i] == 0:
                             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header)
                             Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i],row_val_format_total_item_num)
-                            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i]/100, row_val_format_total_item_num_percent)
-                            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i],row_val_format_total_item_num)
-                            Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i]/100, row_val_format_total_item_num_percent)
+                            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i],row_val_format_total_item_num)
                             row_write_val = row_write_val + 1
                             if next_header_val == 1:
                                 new_row_needed = 1
@@ -1974,9 +1992,7 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             else:
                 Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i],row_val_format_sub_item)
                 Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i],row_val_format_sub_item_num)
-                Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col3'][i]/100, row_val_format_sub_item_percent)
-                Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i],row_val_format_sub_item_num)
-                Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df['Col5'][i]/100, row_val_format_sub_item_percent)
+                Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i],row_val_format_sub_item_num)
                 row_write_val = row_write_val + 1
     cf_bottom_format_1 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -2070,17 +2086,16 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
         if cash_flow_1_df_end_of_page['Col1'][i] in ['Year to Date', 'Period to Date']:
             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df_end_of_page['Col1'][i],cf_bottom_format_6)
             Cash_Flow_1.write_string(row_write_val, 1, 'Beginning Balance',cf_bottom_format_1)
-            Cash_Flow_1.write_string(row_write_val, 2, 'Difference',cf_bottom_format_1)
+            Cash_Flow_1.write_string(row_write_val, 2, 'Ending Balance',cf_bottom_format_1)
+            Cash_Flow_1.write_string(row_write_val, 3, 'Difference',cf_bottom_format_1)
             row_write_val = row_write_val + 1
         elif cash_flow_1_df_end_of_page['Col1'][i] == 'Cash Flow':
             Cash_Flow_1.merge_range(row_write_val, 0, row_write_val, 2, '', header_format_2)
             Cash_Flow_1.set_row(row_write_val,7.5)
             row_write_val = row_write_val + 1
             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df_end_of_page['Col1'][i],cf_header_format_7)
-            Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_3) #cf_header_format_3_percent
-            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col3'][i]/100,cf_header_format_3_percent)
-            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_3)
-            Cash_Flow_1.write_number(row_write_val, 4, cash_flow_1_df_end_of_page['Col5'][i]/100,cf_header_format_3_percent)
+            Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_3) #cf_header_
+            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_3)
             row_write_val = row_write_val + 1
             Cash_Flow_1.merge_range(row_write_val, 0, row_write_val, 2, '', header_format_2)
             Cash_Flow_1.set_row(row_write_val,7.5)
@@ -2088,7 +2103,8 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
         elif cash_flow_1_df_end_of_page['Col1'][i] == 'Total Cash':
             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df_end_of_page['Col1'][i],cf_header_format_8)
             Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_2)
-            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_2)
+            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col3'][i],cf_header_format_2)
+            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_2)
             row_write_val = row_write_val + 1
             Cash_Flow_1.merge_range(row_write_val, 0, row_write_val, 2, '', header_format_2)
             Cash_Flow_1.set_row(row_write_val,7.5)
@@ -2096,7 +2112,8 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
         else:
             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df_end_of_page['Col1'][i],cf_header_format_4)
             Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_5)
-            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_5)
+            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col3'][i],cf_header_format_5)
+            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_5)
             row_write_val = row_write_val + 1
     column_width_list = [
         [71, 0, 0, Cash_Flow_1] ## cashflow
@@ -2109,12 +2126,13 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             pass
     Cash_Flow_1.set_portrait()
     Cash_Flow_1.set_margins(.5,.5,.5,.5)
-    Cash_Flow_1.repeat_rows(0, 5)
-    Cash_Flow_1.print_area(0,0, row_write_val, 4)
+    Cash_Flow_1.repeat_rows(0, 7)
+    Cash_Flow_1.print_area(0,0, row_write_val,3)
     Cash_Flow_1.set_page_view(2)
     total_pages = max(math.ceil(row_write_val/50), 1)
     Cash_Flow_1.fit_to_pages(1, total_pages)
     return cash_flow_1_df_end_of_page
+# ----------------------------------------------------------------- new stuff twelve_month_actual_budget_v2
 def twelve_month_actual_budget_v2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -2267,7 +2285,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -2275,7 +2293,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_total_item_num = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -2283,7 +2301,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'border_color':black_color
                                     })
@@ -2293,7 +2311,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'top':1
                                     , 'border_color':black_color
                                      })
@@ -2303,7 +2321,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border_color':black_color
                                      })
     row_val_format_total_item_num_2 = workbook.add_format({'font_color': black_color
@@ -2312,7 +2330,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -2323,7 +2341,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -2334,7 +2352,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
@@ -2345,7 +2363,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border':6
                                     , 'top':0
                                     , 'left':0
@@ -2358,7 +2376,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
                                     , 'border':6
                                     , 'top':0
                                     , 'left':0
@@ -2371,6 +2389,123 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_sub_item_num_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    row_val_format_sub_item_percent_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                     })
+    row_val_format_total_item_num_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_total_item_percent_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_header_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_item_num_2_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_total_item_percent_2_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_header_2_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_item_num_2_grand_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_total_item_percent_2_grand_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;[Red](#,##0.00%)'
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_total_header_2_grand_var = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
                                     , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'border':6
                                     , 'top':0
@@ -2378,7 +2513,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'right':0
                                     , 'border_color':black_color
                                      })
-    for i in range(4, df.shape[0]):
+    for i in range(3, df.shape[0]):
         new_row_needed = 0
         try:
             val = str(df['Col1'][i])
@@ -2428,13 +2563,16 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                         worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_total_item_num_2_grand)
                         worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_total_item_num_2_grand)
                         try:
-                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2_grand)
+                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2_grand_var)
                         except:
-                            worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_2_grand)
+                            worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_2_grand_var)
                         try:
-                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2_grand)
+                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2_grand_var)
                         except:
-                            worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2_grand)
+                            if df['Col15'][i] == 0 and df['Col16'][i] != 0:
+                                worksheet.write_number(row_write_val, 16, -1,row_val_format_total_item_percent_2_grand_var)
+                            else:
+                                worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2_grand_var)
                         row_write_val = row_write_val + 1
                         if next_header_val == 1:
                             if next_next_total_val == 0:
@@ -2456,13 +2594,16 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                         worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_total_item_num_2)
                         worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_total_item_num_2)
                         try:
-                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2)
+                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2_var)
                         except:
                             worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_2)
                         try:
-                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2)
+                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2_var)
                         except:
-                            worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2)
+                            if df['Col15'][i] == 0 and df['Col16'][i] != 0:
+                                worksheet.write_number(row_write_val, 16, -1,row_val_format_total_item_percent_2_var)
+                            else:
+                                worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2_var)
                         row_write_val = row_write_val + 1
                         if next_header_val == 1:
                             if next_next_total_val == 0:
@@ -2484,13 +2625,16 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                         worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_total_item_num_2)
                         worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_total_item_num_2)
                         try:
-                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2)
+                            worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_2_var)
                         except:
-                            worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_2)
+                            worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_2_var)
                         try:
-                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2)
+                            worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_2_var)
                         except:
-                            worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2)
+                            if df['Col15'][i] == 0 and df['Col16'][i] != 0:
+                                worksheet.write_number(row_write_val, 16, -1,row_val_format_total_item_percent_2_var)
+                            else:
+                                worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_2_var)
                         row_write_val = row_write_val + 1
                         if next_header_val == 1:
                             if next_next_total_val == 0:
@@ -2513,13 +2657,16 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                             worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_total_item_num)
                             worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_total_item_num)
                             try:
-                                worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num)
+                                worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_total_item_num_var)
                             except:
-                                worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num)
+                                worksheet.write_number(row_write_val, 15, 0,row_val_format_total_item_num_var)
                             try:
-                                worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent)
+                                worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_total_item_percent_var)
                             except:
-                                worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent)
+                                if df['Col15'][i] == 0 and df['Col16'][i] != 0:
+                                    worksheet.write_number(row_write_val, 16, -1,row_val_format_total_item_percent_var)
+                                else:
+                                    worksheet.write_number(row_write_val, 16, 0,row_val_format_total_item_percent_var)
                             row_write_val = row_write_val + 1
                             if next_header_val == 1 and next_next_total_val == 0:
                                 new_row_needed = 1
@@ -2572,13 +2719,16 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                 worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_sub_item_num)
                 try:
-                    worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_sub_item_percent)
+                    worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_sub_item_num)
                 except:
-                    worksheet.write_number(row_write_val, 15, 0,row_val_format_sub_item_percent)
+                    worksheet.write_number(row_write_val, 15, 0,row_val_format_sub_item_num)
                 try:
-                    worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_sub_item_percent)
+                    worksheet.write_number(row_write_val, 16, df['Col17'][i]/100,row_val_format_sub_item_percent_var)
                 except:
-                    worksheet.write_number(row_write_val, 16, 0,row_val_format_sub_item_percent)
+                    if df['Col15'][i] == 0 and df['Col16'][i] != 0:
+                        worksheet.write_number(row_write_val, 16, -1,row_val_format_sub_item_percent_var)
+                    else:
+                        worksheet.write_number(row_write_val, 16, 0,row_val_format_sub_item_percent_var)
                 row_write_val = row_write_val + 1
         # add a row or not
         if new_row_needed == 1:
@@ -2598,12 +2748,13 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
             pass
     worksheet.set_landscape()
     worksheet.set_margins(.5,.5,.5,.5)
-    worksheet.repeat_rows(0, 6)
+    worksheet.repeat_rows(0, 7)
     worksheet.print_area(0,0, row_write_val, 16)
     worksheet.set_page_view(2)
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ----------------------------------------------------------------- new stuff mnth_gl_sheet
 def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -2698,6 +2849,14 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_size':10
                                     , 'align':'left'
                                      })
+    header_format_body_wrap = workbook.add_format({'font_color': black_color
+                                    , 'bg_color':'#EEEEEE'
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'text_wrap':True
+                                     })
     header_format_body_num = workbook.add_format({'font_color': black_color
                                     , 'bg_color':'#EEEEEE'
                                     , 'bold':True
@@ -2711,7 +2870,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'center'
                                     , 'num_format':'mm-yyyy'
                                      })
     header_format_date_2 = workbook.add_format({'font_color': black_color
@@ -2719,14 +2878,14 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'center'
                                     , 'num_format':14
                                      })
     data_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     data_format_1_wrap = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -2744,13 +2903,13 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'center'
                                     , 'num_format':14
                                         })
     data_format_4 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
-                                    , 'align':'left'
+                                    , 'align':'center'
                                     , 'num_format':'mm-yyyy'
                                         })
     # 
@@ -2804,7 +2963,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -2817,7 +2976,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
                                     , 'border':6
                                     , 'left':0
@@ -2845,7 +3004,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
             worksheet.write_blank(row_write_val, 1, df['Col2'][i],header_format_body)
             worksheet.write_blank(row_write_val, 2, None,header_format_body)
             worksheet.write_blank(row_write_val, 3, None,header_format_body)
-            worksheet.write_string(row_write_val, 4, df['Col5'][i],header_format_body)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],header_format_body_wrap)
             worksheet.write_blank(row_write_val, 5, None,header_format_body)
             worksheet.write_blank(row_write_val, 6, None,header_format_body)
             worksheet.write_blank(row_write_val, 7, None,header_format_body)
@@ -2853,7 +3012,15 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
             try:
                 val_col_10_color = float(df['Col10'][i])
             except:
-                val_col_10_color = df['Col10'][i]
+                val_col_10_color = ''
+                for i in df['Col10'][i]:
+                    if i == ' ':
+                        pass
+                    elif i == ',':
+                        pass
+                    else:
+                        val_col_10_color = val_col_10_color+i
+                val_col_10_color = float(val_col_10_color)
             worksheet.write_number(row_write_val, 9, val_col_10_color,header_format_body_num)
             worksheet.write_string(row_write_val, 10, 'Beginning Balance',header_format_body)
             row_write_val += 1
@@ -2862,7 +3029,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
             worksheet.write_blank(row_write_val, 1, None,header_format_body)
             worksheet.write_blank(row_write_val, 2, None,header_format_body)
             worksheet.write_blank(row_write_val, 3, None,header_format_body)
-            worksheet.write_string(row_write_val, 4, df['Col5'][i],header_format_body)
+            worksheet.write_string(row_write_val, 4, df['Col5'][i],header_format_body_wrap)
             worksheet.write_blank(row_write_val, 5, None,header_format_body)
             worksheet.write_blank(row_write_val, 6, None,header_format_body)
             try:
@@ -2877,7 +3044,16 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                 val_col_10_deux = float(df['Col10'][i])
                 worksheet.write_number(row_write_val, 9, val_col_10_deux,header_format_body_num)
             except:
-                worksheet.write(row_write_val, 9, df['Col10'][i],header_format_body_num)
+                val_col_10_deux = ''
+                for i in df['Col10'][i]:
+                    if i == ' ':
+                        pass
+                    elif i == ',':
+                        pass
+                    else:
+                        val_col_10_deux = val_col_10_deux+i
+                val_col_10_deux = float(val_col_10_deux)
+                worksheet.write(row_write_val, 9, val_col_10_deux,header_format_body_num)
             worksheet.write(row_write_val, 10, 'Ending Balance',header_format_body)
             row_write_val = row_write_val + 1
             worksheet.set_row(row_write_val,7.5)
@@ -2888,7 +3064,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                 worksheet.write(row_write_val, 1, df['Col2'][i],data_format_1)
                 worksheet.write(row_write_val, 2, df['Col3'][i],data_format_3)
                 worksheet.write(row_write_val, 3, df['Col4'][i],data_format_4)
-                worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1)
+                worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1_wrap)
                 worksheet.write(row_write_val, 5, df['Col6'][i],data_format_1)
                 worksheet.write(row_write_val, 6, df['Col7'][i],data_format_3)
                 worksheet.write(row_write_val, 7, df['Col8'][i],data_format_2)
@@ -2900,15 +3076,15 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
                 pass
     column_width_list = [
                 [11.5, 0, 0, worksheet]
-                ,[16, 1, 1, worksheet]
+                ,[25, 1, 1, worksheet]
                 ,[10.8, 2, 2, worksheet]
                 ,[11.3, 3, 3, worksheet]
-                ,[39.6, 4, 4, worksheet]
+                ,[32, 4, 4, worksheet]
                 ,[9.3, 5, 5, worksheet]
                 ,[23.3, 6, 6, worksheet]
                 ,[14, 7, 8, worksheet]
                 ,[14.4, 9, 9, worksheet]
-                ,[69.82, 10, 10, worksheet]
+                ,[32, 10, 10, worksheet]
     ]
     for i in column_width_list:
         try:
@@ -2923,6 +3099,7 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ----------------------------------------------------------------- new stuff ten_sched_1_v2
 def ten_sched_1_v2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -3086,6 +3263,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'border_color':black_color
                                     , 'text_wrap':True
                                     , 'num_format':14
+                                    , 'align':'center'
                                     , 'valign':'vcenter'
                                      })
     rent_step_header_1 = workbook.add_format({'font_color': black_color
@@ -3118,7 +3296,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'align':'left'
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'text_wrap':False
+                                    , 'text_wrap':True
                                     , 'valign':'vcenter'
                                      })
     rent_step_base_1 = workbook.add_format({'font_color': black_color
@@ -3150,6 +3328,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'text_wrap':True
                                     , 'valign':'vcenter'
                                     ,'num_format':14
+                                    , 'align':'center'
                                      })
     box_title_1 = workbook.add_format({'font_color': black_color
                                     , 'bold':True
@@ -3160,6 +3339,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'border_color':black_color
                                     , 'text_wrap':True
                                     ,'num_format':14
+                                    , 'align':'center'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                      })
@@ -3171,6 +3351,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'border_color':black_color
                                     , 'text_wrap':True
                                     ,'num_format':14
+                                    , 'align':'center'
                                     , 'bottom':1
                                     , 'border_color':black_color
                                      })
@@ -3180,7 +3361,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'border_color':black_color
-                                    , 'text_wrap':False
+                                    , 'text_wrap':True
                                     ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     box_base_3 = workbook.add_format({'font_color': black_color
@@ -3189,7 +3370,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'border_color':black_color
-                                    , 'text_wrap':False
+                                    , 'text_wrap':True
                                     ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     box_base_2 = workbook.add_format({'font_color': black_color
@@ -3502,10 +3683,10 @@ def ten_sched_1_v2(workbook, df, worksheet):
         else:
             pass
     column_width_list = [
-        [40.27, 0, 0, worksheet]        
+        [21, 0, 0, worksheet]        
         ,[12.7, 1, 1, worksheet]
-        ,[40.27, 2, 2, worksheet]
-        ,[17.55, 3, 3, worksheet]
+        ,[18, 2, 2, worksheet]
+        ,[18, 3, 3, worksheet]
         ,[12.7, 4, 15, worksheet]
         ,[17.55, 16, 16, worksheet]
     ]
@@ -3522,6 +3703,7 @@ def ten_sched_1_v2(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# -----------------------------------------------------------------
 def payment_register_sheet_2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -3618,6 +3800,7 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
+                                    , 'text_wrap':True
                                      })
     header_format_date_1 = workbook.add_format({'font_color': black_color
                                     , 'bg_color':'#EEEEEE'
@@ -3626,6 +3809,7 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':'mm-yyyy'
+                                    , 'text_wrap':True
                                      })
     header_format_date_2 = workbook.add_format({'font_color': black_color
                                     , 'bg_color':'#EEEEEE'
@@ -3634,18 +3818,22 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':14
+                                    , 'align':'center'
+                                    , 'text_wrap':True
                                      })
     data_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'text_wrap':True
                                     })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'text_wrap':True
                                         })
     total_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3657,6 +3845,7 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     ,'top':0
+                                    , 'text_wrap':True
                                         })
     total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3668,22 +3857,31 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     ,'top':0
+                                    , 'text_wrap':True
                                         })
     total_format_1_gray = workbook.add_format({'font_color': black_color
-                                    , 'bg_color':'#EEEEEE'
+                                    #, 'bg_color':'#EEEEEE'
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
-                                    , 'bold':False
+                                    , 'bold':True
+                                    , 'text_wrap':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color': black_color
                                         })
     total_format_2_gray = workbook.add_format({'font_color': black_color
-                                    , 'bg_color':'#EEEEEE'
+                                    #, 'bg_color':'#EEEEEE'
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
-                                    , 'bold':False
+                                    , 'bold':True
+                                    , 'text_wrap':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color': black_color
                                         })
     grand_total_base = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3692,6 +3890,7 @@ def payment_register_sheet_2(workbook, df, worksheet):
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':False
                                     , 'bottom': 1
+                                    , 'text_wrap':True
                                         })
     
     for i in range(4, df.shape[0]): #flag_total_rows_2
@@ -3791,22 +3990,32 @@ def payment_register_sheet_2(workbook, df, worksheet):
             row_write_val += 1
         else:
             pass            
-    column_width_list = [[14.4, 0, 0, worksheet] ## Payment Register
-            ,[13, 1, 2, worksheet] ## Payment Register
-            ,[15.27, 3, 3, worksheet] ## Payment Register
-            ,[33.45, 4, 4, worksheet] ## Payment Register
-            ,[13, 5, 6, worksheet] ## Payment Register
-            ,[19.36, 7, 7, worksheet] ## Payment Register
-            ,[10.73, 8, 10, worksheet] ## Payment Register
-            ,[18.45, 11, 11, worksheet] ## Payment Register
-            ,[15.27, 12, 12, worksheet] ## Payment Register
-            ,[49.35, 13, 13, worksheet] ## Payment Register
+    column_width_list = [[14.4, 0, 0, worksheet] ## Payment Register 0
+            ,[13, 1, 2, worksheet] ## Payment Register 1
+            ,[15.27, 3, 3, worksheet] ## Payment Register 2
+            ,[20, 4, 4, worksheet] ## Payment Register 3
+            ,[13, 5, 6, worksheet] ## Payment Register 4
+            ,[19.36, 7, 7, worksheet] ## Payment Register 5
+            ,[10.73, 8, 10, worksheet] ## Payment Register 6
+            ,[18.45, 11, 11, worksheet] ## Payment Register 7
+            ,[15.27, 12, 12, worksheet] ## Payment Register 8
+            ,[49.35, 13, 13, worksheet] ## Payment Register 9
     ]
+    val_loop = 0
     for i in column_width_list:
         try:
-            i[3].set_column(i[1],i[2], i[0])
+            if val_loop == 7:
+                i[3].set_column(first_col=i[1],last_col=i[2], width=i[0], options={'level':1, 'hidden':True})
+            elif val_loop == 8:
+                i[3].set_column(first_col=i[1],last_col=i[2], width=i[0], options={'level':1, 'hidden':True})
+            elif val_loop == 9:
+                i[3].set_column(first_col=i[1],last_col=i[2], width=i[0], options={'collapsed':1})
+            else:
+                i[3].set_column(i[1],i[2], i[0])
         except:
+            #print(val_loop)
             pass
+        val_loop += 1
     worksheet.set_landscape()
     worksheet.set_margins(.5,.5,.5,.5)
     worksheet.repeat_rows(0, 3)
@@ -3815,6 +4024,7 @@ def payment_register_sheet_2(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ----------------------------------------------------------------- new stuff aging_detail_2
 def aging_detail_2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -3928,19 +4138,23 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'center'
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     data_format_3 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':14
+                                    , 'align':'center'
                                      })
     subtotal_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
                                     })
     subtotal_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3948,6 +4162,9 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'align':'right'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
                                     })
     total_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3957,17 +4174,18 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44})
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'})
     total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':14
+                                    , 'align':'center'
                                     , 'bold':True
                                     , 'top':1
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -3979,27 +4197,28 @@ def aging_detail_2(workbook, df, worksheet):
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     grand_total_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':14
+                                    , 'align':'center'
                                     , 'bold':True
                                     , 'border':6
                                     , 'top':0
                                     , 'left':0
                                     , 'right':0
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
     bottom_line_format = workbook.add_format({'font_color': black_color
                                     , 'bottom':1
                                     , 'border_color':black_color
-                                    , 'num_format':44
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
                                     })
-    for i in range(4, df.shape[0]):
+    for i in range(3, df.shape[0]):
         if df['header'][i] == 1:
             worksheet.merge_range(row_write_val, 0, row_write_val, 14, df['Col1'][i], header_format_body)
             row_write_val = row_write_val + 1
@@ -4020,7 +4239,15 @@ def aging_detail_2(workbook, df, worksheet):
             worksheet.write_number(row_write_val, 14, df['Col15'][i],data_format_2)
             row_write_val = row_write_val + 1
         elif df['subtotal'][i] == 1:
+            worksheet.write_blank(row_write_val, 0, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 1, None, subtotal_format_1)
             worksheet.write_string(row_write_val, 2, df['Col3'][i],subtotal_format_1)
+            worksheet.write_blank(row_write_val, 3, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 4, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 5, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 6, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 7, None, subtotal_format_1)
+            worksheet.write_blank(row_write_val, 8, None, subtotal_format_1)
             worksheet.write_number(row_write_val, 8, df['Col9'][i],subtotal_format_2)
             worksheet.write_number(row_write_val, 9, df['Col10'][i],subtotal_format_2)
             worksheet.write_number(row_write_val, 10, df['Col11'][i],subtotal_format_2)
@@ -4073,7 +4300,7 @@ def aging_detail_2(workbook, df, worksheet):
         else:
             pass
     if df['Col1'][3] == 'No outstanding AR as of period end':
-        worksheet.merge_range(5, 0, 5, 13, df['Col1'][3], data_format_1)
+        #worksheet.merge_range(6, 0, 6, 13, df['Col1'][3], data_format_1)
         worksheet.set_row(6,7.5)
         row_write_val = 6
     column_width_list = [
@@ -4091,11 +4318,16 @@ def aging_detail_2(workbook, df, worksheet):
         ,[13, 13, 13, worksheet] ## AR Detail
         ,[15.27, 14, 14, worksheet] ## AR Detail
     ]
+    loop_val = 0
     for i in column_width_list:
         try:
-            i[3].set_column(i[1],i[2], i[0])
+            if loop_val == 1:
+                i[3].set_column(i[1],i[2], i[0], options={'hidden':True})
+            else:
+                i[3].set_column(i[1],i[2], i[0])
         except:
             pass
+        loop_val += 1
     worksheet.set_landscape()
     worksheet.set_margins(.5,.5,.5,.5)
     worksheet.repeat_rows(0, 3)
@@ -4104,6 +4336,7 @@ def aging_detail_2(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ----------------------------------------------------------------- new stuff JE_REGISTER_SHEET
 def JE_REGISTER_SHEET(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -4112,7 +4345,7 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
     grey_color = '#211f20'
     header_1 = df.columns[0]
     try:
-        header_1 = rename_prop(header_1)
+        header_1 = header_1.split('(', 1)[0]
     except:
         pass
     df = df.rename(columns={df.columns[0]: 'Col1'
@@ -4130,9 +4363,9 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                            , df.columns[12]: 'Col13'
                            , df.columns[13]: 'Col14'
                            })
-    header_2 = df['Col1'][1]
+    header_2 = df['Col1'][0]
     try:
-        header_2 = rename_prop(header_2)
+        header_2 = header_2.split('(', 1)[0]
     except:
         pass
     header_3 = df['Col1'][1]
@@ -4162,8 +4395,8 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                                     , 'font_size':14
                                     , 'align':'left'
                                      })
-    worksheet.merge_range("A1:N1", header_2, header_format_1)
-    worksheet.merge_range("A2:N2", header_1, header_format_1)
+    worksheet.merge_range("A2:N2", header_2, header_format_1)
+    worksheet.merge_range("A1:N1", header_1, header_format_1)
     header_format_2 = workbook.add_format({'font_color': dark_gray_color
                                     , 'bold':False
                                     , 'font_name': 'Century Gothic'
@@ -4176,7 +4409,7 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                                     , 'bold':True
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':11
-                                    , 'align':'center'
+                                    , 'align':'left'
                                      })
     for col in range(14):
         try:
@@ -4192,6 +4425,12 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                                     , 'align':'left'
                                     , 'num_format':4
                                     })
+    data_format_1_center = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'center'
+                                    , 'num_format':4
+                                    })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -4203,6 +4442,7 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':14
+                                    , 'align':'center'
                                         })
     data_format_4 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -4262,15 +4502,15 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                 try:
                     worksheet.write(row_write_val, 2, df['Col3'][i],data_format_4)
                 except:
-                    worksheet.write_blank(row_write_val, 6, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 2, None,data_format_1)
                 try:
                     worksheet.write(row_write_val, 3, df['Col4'][i],data_format_3)
                 except:
-                    worksheet.write_blank(row_write_val, 6, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 3, None,data_format_1)
                 try:
-                    worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1)
+                    worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1_center)
                 except:
-                    worksheet.write_blank(row_write_val, 6, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 4, None,data_format_1)
                 try:
                     worksheet.write(row_write_val, 5, df['Col6'][i],data_format_1)
                 except:
@@ -4357,23 +4597,28 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                         worksheet.set_row(row_write_val,7.5)
                         row_write_val = row_write_val + 1
     column_width_list = [
-                [9.8, 0, 0, worksheet] ## JE Register
-                ,[10.2, 1, 3, worksheet] ## JE Register
-                ,[9.5, 4, 4, worksheet] ## JE Register
-                ,[12.8, 5, 5, worksheet] ## JE Register
-                ,[42.2, 6, 6, worksheet] ## JE Register
-                ,[18.5, 7, 7, worksheet] ## JE Register
-                ,[19.82, 8, 8, worksheet] ## JE Register
-                ,[12.5, 9, 10, worksheet] ## JE Register
-                ,[20, 11, 11, worksheet] ## JE Register
-                ,[31, 12, 12, worksheet] ## JE Register
+                [9.8, 0, 0, worksheet] ## JE Register 0
+                ,[10.2, 1, 3, worksheet] ## JE Register 1 
+                ,[9.5, 4, 4, worksheet] ## JE Register 2
+                ,[12.8, 5, 5, worksheet] ## JE Register 3
+                ,[42.2, 6, 6, worksheet] ## JE Register 4
+                ,[16, 7, 7, worksheet] ## JE Register 5
+                ,[19.82, 8, 8, worksheet] ## JE Register 6
+                ,[12.5, 9, 10, worksheet] ## JE Register 7
+                ,[20, 11, 11, worksheet] ## JE Register 8
+                ,[31, 12, 12, worksheet] ## JE Register 9
                 ,[37.5, 13, 13, worksheet] ## JE Register
     ]
+    loop_val = 0
     for i in column_width_list:
         try:
-            i[3].set_column(i[1],i[2], i[0])
+            if loop_val in [5, 6, 9]:
+                i[3].set_column(i[1],i[2], i[0], options={'hidden':True})
+            else:
+                i[3].set_column(i[1],i[2], i[0])
         except:
             pass
+        loop_val += 1
     worksheet.set_landscape()
     worksheet.set_margins(.5,.5,.5,.5)
     worksheet.repeat_rows(0, 3)
@@ -4382,6 +4627,7 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ----------------------------------------------------------------- new stuff ap_detail_sheet_def_2
 def ap_detail_sheet_def_2(workbook, df, worksheet):
     yellow_color = '#b4992d'
     dark_gray_color = '#505050'
@@ -4529,12 +4775,14 @@ def ap_detail_sheet_def_2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':14
+                                    , 'align':'center'
                                      })
     data_format_1 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'text_wrap':True
                                     })
     data_format_2 = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
@@ -4547,22 +4795,29 @@ def ap_detail_sheet_def_2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':14
+                                    , 'align':'center'
                                         })
     total_format_1 = workbook.add_format({'font_color': black_color
-                                    , 'bg_color':'#EEEEEE'
+                                    #, 'bg_color':'#EEEEEE'
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'left'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
-                                    , 'bold':False
+                                    , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color': black_color
                                         })
     total_format_2 = workbook.add_format({'font_color': black_color
-                                    , 'bg_color':'#EEEEEE'
+                                    #, 'bg_color':'#EEEEEE'
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
-                                    , 'bold':False
+                                    , 'bold':True
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color': black_color
                                         })
     grand_total_format_bottom = workbook.add_format({'font_color': black_color
                                     , 'border_color': black_color
@@ -4602,6 +4857,7 @@ def ap_detail_sheet_def_2(workbook, df, worksheet):
                                     , 'right':0
                                     #, 'bottom':3
                                     , 'border_color':black_color
+                                    , 'text_wrap':True
                                         })
     for i in range(5, df.shape[0]): #flag_total_rows_2
         if df['color_col'][i] == 1:
@@ -4707,12 +4963,12 @@ def ap_detail_sheet_def_2(workbook, df, worksheet):
     column_width_list = [[13.8, 0, 0, worksheet] ## AP Detail
                 ,[12.2, 1, 1, worksheet] ## AP Detail
                 ,[25.2, 2, 2, worksheet] ## AP Detail
-                ,[17.55, 3, 3, worksheet] ## AP Detail
-                ,[17.55, 4, 4, worksheet] ## AP Detail
-                ,[17.55, 5, 5, worksheet] ## AP Detail
-                ,[17.55, 6, 6, worksheet] ## AP Detail
-                ,[35.73, 7, 7, worksheet] ## AP Detail
-                ,[17.55, 8, 8, worksheet] ## AP Detail
+                ,[10, 3, 3, worksheet] ## AP Detail
+                ,[10, 4, 4, worksheet] ## AP Detail
+                ,[14, 5, 5, worksheet] ## AP Detail
+                ,[14, 6, 6, worksheet] ## AP Detail
+                ,[20, 7, 7, worksheet] ## AP Detail
+                ,[20, 8, 8, worksheet] ## AP Detail
                 ,[10.73, 9, 14, worksheet] ## AP Detail
                 ,[35.73, 15, 15, worksheet] ## AP Detail
     ]
@@ -4729,3 +4985,4 @@ def ap_detail_sheet_def_2(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# -----------------------------------------------------------------
