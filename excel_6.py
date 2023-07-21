@@ -344,6 +344,8 @@ def income_statement_v2(workbook, income_statement_1, Income_Statement):
             next_row_val = ''
         if income_statement_1['Col1'][i] == 'AL OF ALL':
             pass
+        elif income_statement_1['Col1'][i] == 'TOTAL OF ALL':
+            pass
         elif income_statement_1['Col1'][i] == 'TOTAL NET INCOME':
             Income_Statement.write_string(row_write_val, 0, income_statement_1['Col1'][i], row_val_format_header_3)
             Income_Statement.write_number(row_write_val, 1, income_statement_1['Col2'][i], row_val_format_total_item_num_3)
@@ -702,6 +704,174 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                                     , 'bottom':1
                                     , 'valign':'vcenter'
                                      })
+    #--------------------------------------------------------------------------------------------------------------------
+    header_format_1_base = workbook.add_format({'font_color': black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':14
+                                    , 'align':'left'
+                                     })
+    header_format_2_base = workbook.add_format({'font_color': black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'text_wrap':True
+                                     })
+    header_format_3_base = workbook.add_format({'font_color': white_color
+                                    , 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':11
+                                    , 'align':'center'
+                                     })
+    row_val_format_header_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_sub_item_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_sub_item_2_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_sub_item_num_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_sub_item_percent_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_total_item_num_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'valign':'vcenter'
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_total_item_percent_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
+                                    , 'valign':'vcenter'
+                                    , 'top':1
+                                    , 'border_color':black_color
+                                     })
+    row_val_format_header_top_bottom_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_total_item_num_top_bottom_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'valign':'vcenter'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    })
+    row_val_format_total_item_percent_top_bottom_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_header_top_bottom_2_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'border_color':black_color
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_total_item_num_top_bottom_2_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'border_color':black_color
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'valign':'vcenter'
+                                    })
+    row_val_format_total_item_percent_top_bottom_2_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'#,##0.00%;(#,##0.00%)'
+                                    , 'border_color':black_color
+                                    , 'border':6
+                                    , 'top':0
+                                    , 'left':0
+                                    , 'right':0
+                                    , 'valign':'vcenter'
+                                     })
+    row_val_format_header_top_bottom_3_base = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':True
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'bottom':1
+                                    , 'valign':'vcenter'
+                                     })
     df = df.rename(columns={df.columns[0]: 'Col1'
                            , df.columns[1]: 'Col2'
                            , df.columns[2]: 'Col3'
@@ -746,16 +916,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
         #print(df['Col1'][i])
         if df['Col1'][i] == 'TOTAL NET INCOME':
             if 1 == 1:
-                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom_2)
-                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom_2)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom_2)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom_2_base)
+                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom_2_base)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom_2_base)
                 worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num_top_bottom_2)
                 try:
                     worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent_top_bottom_2)
                 except:
                     worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent_top_bottom_2)
-                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom_2)
-                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom_2)
+                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom_2_base)
+                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom_2_base)
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num_top_bottom_2)
                 try:
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom_2)
@@ -778,16 +948,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
             except:
                 next_col_1 = ''
             if next_col_1 == 'TOTAL NET INCOME':
-                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom)
-                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom_base)
+                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom_base)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom_base)
                 worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num_top_bottom)
                 try:
                     worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent_top_bottom)
                 except:
                     worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent_top_bottom)
-                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom)
-                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom)
+                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom_base)
+                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom_base)
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num_top_bottom)
                 try:
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom)
@@ -803,16 +973,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                 worksheet.set_row(row_write_val,7.5)
                 row_write_val = row_write_val + 1
             elif df['Col1'][i] in ['TOTAL OPERATING INCOME', 'TOTAL OPERATING EXPENSES', 'TOTAL NET OPERATING INCOME']:
-                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom)
-                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_top_bottom_base)
+                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_top_bottom_base)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_top_bottom_base)
                 worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num_top_bottom)
                 try:
                     worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent_top_bottom)
                 except:
                     worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent_top_bottom)
-                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom)
-                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom)
+                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_top_bottom_base)
+                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_top_bottom_base)
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num_top_bottom)
                 try:
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent_top_bottom)
@@ -825,16 +995,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
             else:
                 if df['Total_Check'][i] == 1:
                     if next_total_val == 1:
-                        worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
-                        worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
+                        worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_base)
+                        worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_base)
+                        worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_base)
                         worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
                         try:
                             worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
                         except:
                             worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent)
-                        worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
-                        worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
+                        worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_base)
+                        worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_base)
                         worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
                         try:
                             worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
@@ -843,16 +1013,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
                         row_write_val = row_write_val + 1
                     else:
                         if df['Nan_Var_Check'][i] >= 0:
-                            worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header)
-                            worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num)
-                            worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num)
+                            worksheet.write_string(row_write_val, 0, df['Col1'][i], row_val_format_header_base)
+                            worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_total_item_num_base)
+                            worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_total_item_num_base)
                             worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_total_item_num)
                             try:
                                 worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_total_item_percent)
                             except:
                                 worksheet.write_number(row_write_val, 4, 0,row_val_format_total_item_percent)
-                            worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num)
-                            worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num)
+                            worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_total_item_num_base)
+                            worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_total_item_num_base)
                             worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_total_item_num)
                             try:
                                 worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_total_item_percent)
@@ -896,16 +1066,16 @@ def budget_comp_sheet_creation_v2(workbook, df, worksheet):
             if df['Nan_Var_Check'][i] == 2:
                 pass
             else:
-                worksheet.write_string(row_write_val, 0, df['Col1'][i],row_val_format_sub_item)
-                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_sub_item_num)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_sub_item_num)
+                worksheet.write_string(row_write_val, 0, df['Col1'][i],row_val_format_sub_item_base)
+                worksheet.write_number(row_write_val, 1, df['Col2'][i],row_val_format_sub_item_num_base)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],row_val_format_sub_item_num_base)
                 worksheet.write_number(row_write_val, 3, df['Col4'][i],row_val_format_sub_item_num)
                 try:
                     worksheet.write_number(row_write_val, 4, df['Col5'][i]/100,row_val_format_sub_item_percent)
                 except:
                     worksheet.write_number(row_write_val, 4, 0,row_val_format_sub_item_percent)
-                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_sub_item_num)
-                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_sub_item_num)
+                worksheet.write_number(row_write_val, 5, df['Col6'][i],row_val_format_sub_item_num_base)
+                worksheet.write_number(row_write_val, 6, df['Col7'][i],row_val_format_sub_item_num_base)
                 worksheet.write_number(row_write_val, 7, df['Col8'][i],row_val_format_sub_item_num)
                 try:
                     worksheet.write_number(row_write_val, 8, df['Col9'][i]/100,row_val_format_sub_item_percent)
@@ -1572,14 +1742,16 @@ def create_xl_tb_v2(workbook, trail_balance_df, Trial_Balance):
     Trial_Balance.merge_range(7, 0, 7, 4, '', header_format_2)
     Trial_Balance.set_row(7,7.5)
     row_write_val = 8
-    for i in range(4, trail_balance_df.shape[0]):
+    for i in range(3, trail_balance_df.shape[0]):
         if trail_balance_df['Col1'][i] == 'Total':
-            Trial_Balance.write_string(row_write_val, 0, trail_balance_df['Col1'][i], row_val_format_sub_item_total)
-            Trial_Balance.write_number(row_write_val, 1, trail_balance_df['Col2'][i], row_val_format_total_item_num_total)
-            Trial_Balance.write_number(row_write_val, 2, trail_balance_df['Col3'][i], row_val_format_total_item_num_total)
-            Trial_Balance.write_number(row_write_val, 3, trail_balance_df['Col4'][i], row_val_format_total_item_num_total)
-            Trial_Balance.write_number(row_write_val, 4, trail_balance_df['Col5'][i], row_val_format_total_item_num_total)
-            row_write_val = row_write_val + 1
+            previous_value = trail_balance_df['Col1'][i - 1]
+            if previous_value != 'Total':
+                Trial_Balance.write_string(row_write_val, 0, trail_balance_df['Col1'][i], row_val_format_sub_item_total)
+                Trial_Balance.write_number(row_write_val, 1, trail_balance_df['Col2'][i], row_val_format_total_item_num_total)
+                Trial_Balance.write_number(row_write_val, 2, trail_balance_df['Col3'][i], row_val_format_total_item_num_total)
+                Trial_Balance.write_number(row_write_val, 3, trail_balance_df['Col4'][i], row_val_format_total_item_num_total)
+                Trial_Balance.write_number(row_write_val, 4, trail_balance_df['Col5'][i], row_val_format_total_item_num_total)
+                row_write_val = row_write_val + 1
         elif trail_balance_df['Col1'][i + 1] == 'Total':
             Trial_Balance.write_string(row_write_val, 0, trail_balance_df['Col1'][i], row_val_format_sub_item_prior_total)
             Trial_Balance.write_number(row_write_val, 1, trail_balance_df['Col2'][i],row_val_format_total_item_num_prior_total)
@@ -1881,14 +2053,14 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
     Cash_Flow_1.merge_range("A3:C3", header_3_cf_1, header_format_2)
     Cash_Flow_1.merge_range("A4:C4", header_4_cf_1, header_format_2)
     header_cols = [ 'Month to Date', 'Year to Date']
-    for row in range(3):
-        if row == 0:
+    for row in range(4):
+        if row <= 1:
             Cash_Flow_1.write_blank(4, row, '', header_format_3)
             Cash_Flow_1.write_blank(5, row, '', header_format_3)
         else:
-            Cash_Flow_1.write_string(4, row, header_cols[row - 1], header_format_3)
-    Cash_Flow_1.write_formula(5, 1, '=+TEXT(RIGHT(A3,8),"mmmm yyyy")', header_format_3)
-    Cash_Flow_1.write_formula(5, 2, '=+B6', header_format_3)
+            Cash_Flow_1.write_string(4, row, header_cols[row - 2], header_format_3)
+    Cash_Flow_1.write_formula(5, 2, '=+TEXT(RIGHT(A3,8),"mmmm yyyy")', header_format_3)
+    Cash_Flow_1.write_formula(5, 3, '=+C6', header_format_3)
     Cash_Flow_1.merge_range(6, 0, 6, 4, '', header_format_2)
     Cash_Flow_1.set_row(6,7.5)
     row_write_val = 7
@@ -1928,31 +2100,36 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             elif cash_flow_1_df['Col1'][i] in ['TOTAL OPERATING INCOME', 'TOTAL OPERATING EXPENSES', 'TOTAL NET OPERATING INCOME', 'TOTAL NET INCOME']:
                 if cash_flow_1_df['Col1'][i] == 'TOTAL NET INCOME':
                     Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_num_total_net_income)
-                    Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_total_net_income)
-                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_total_net_income)
+                    Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_header_num_total_net_income)
+                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_total_net_income)
+                    Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_total_net_income)
                     row_write_val = row_write_val + 1
                 else:
                     Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_2)
-                    Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_2)
-                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_2)
+                    Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_header_2)
+                    Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_2)
+                    Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_2)
                     row_write_val = row_write_val + 1
             else:
                 if cash_flow_1_df['Total_Check'][i] == 1:
                     if cash_flow_1_df['Col1'][i + 1] == 'TOTAL NET INCOME': # row_val_format_total_item_num_prior_net_income_percent
                         Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header_prior_net_income)
-                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_prior_net_income)
-                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_prior_net_income)
+                        Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_header_prior_net_income)
+                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i], row_val_format_total_item_num_prior_net_income)
+                        Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num_prior_net_income)
                         row_write_val = row_write_val + 1
                     elif next_total_val == 1:
                         Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header)
-                        Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i], row_val_format_total_item_num)
-                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i], row_val_format_total_item_num)
+                        Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_header)
+                        Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i], row_val_format_total_item_num)
+                        Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i], row_val_format_total_item_num)
                         row_write_val = row_write_val + 1
                     else:
                         if cash_flow_1_df['Nan_Var_Check'][i] == 0:
                             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i], row_val_format_header)
-                            Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i],row_val_format_total_item_num)
-                            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i],row_val_format_total_item_num)
+                            Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_header)
+                            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i],row_val_format_total_item_num)
+                            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i],row_val_format_total_item_num)
                             row_write_val = row_write_val + 1
                             if next_header_val == 1:
                                 new_row_needed = 1
@@ -1991,8 +2168,9 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
                 pass
             else:
                 Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df['Col1'][i],row_val_format_sub_item)
-                Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df['Col2'][i],row_val_format_sub_item_num)
-                Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col4'][i],row_val_format_sub_item_num)
+                Cash_Flow_1.write_blank(row_write_val, 1, '', row_val_format_sub_item)
+                Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df['Col2'][i],row_val_format_sub_item_num)
+                Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df['Col4'][i],row_val_format_sub_item_num)
                 row_write_val = row_write_val + 1
     cf_bottom_format_1 = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -2126,7 +2304,7 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             pass
     Cash_Flow_1.set_portrait()
     Cash_Flow_1.set_margins(.5,.5,.5,.5)
-    Cash_Flow_1.repeat_rows(0, 7)
+    Cash_Flow_1.repeat_rows(0, 6)
     Cash_Flow_1.print_area(0,0, row_write_val,3)
     Cash_Flow_1.set_page_view(2)
     total_pages = max(math.ceil(row_write_val/50), 1)
@@ -2286,6 +2464,14 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                                     , 'font_size':10
                                     , 'align':'right'
                                     , 'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                     })
+    row_val_format_sub_item_num_red = workbook.add_format({'font_color': black_color
+                                    #, 'bg_color':black_color
+                                    , 'bold':False
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'num_format':'_(* #,##0.00_);[Red]_(* (#,##0.00);_(* "-"??_);_(@_)'
                                      })
     row_val_format_sub_item_percent = workbook.add_format({'font_color': black_color
                                     #, 'bg_color':black_color
@@ -2521,6 +2707,8 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
             val = ''
         if val == 'AL OF ALL':
             pass
+        elif val == 'TOTAL OF ALL':
+            pass
         elif df['Header_Check'][i] == 1:
             try:
                 next_total_val = df['Total_Check'][i-1]
@@ -2719,7 +2907,7 @@ def twelve_month_actual_budget_v2(workbook, df, worksheet):
                 worksheet.write_number(row_write_val, 13, df['Col14'][i],row_val_format_sub_item_num)
                 worksheet.write_number(row_write_val, 14, df['Col15'][i],row_val_format_sub_item_num)
                 try:
-                    worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_sub_item_num)
+                    worksheet.write_number(row_write_val, 15, df['Col16'][i],row_val_format_sub_item_num_red)
                 except:
                     worksheet.write_number(row_write_val, 15, 0,row_val_format_sub_item_num)
                 try:
@@ -3405,7 +3593,32 @@ def ten_sched_1_v2(workbook, df, worksheet):
                                     , 'top':1
                                     , 'border_color':black_color
                                      })
+    format_vacant = workbook.add_format({'font_color': black_color
+                                    , 'bold':True #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
+    format_vacant_2 = workbook.add_format({'font_color': black_color
+                                    , 'bold':False #, 'bg_color':black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'right'
+                                    , 'border_color':black_color
+                                    , 'text_wrap':True
+                                    ,'num_format':'_(* #,##0.00_);_(* (#,##0.00);_(* "-"??_);_(@_)'
+                                    , 'top':1
+                                    , 'bottom':1
+                                    , 'border_color':black_color
+                                     })
     row_write_val = 6
+    vacant_counter = 0
     for i in range(1, df.shape[0]):
         if df['Header_Check'][i] == 1: # row_val_format_header
             worksheet.write_string(row_write_val, 0, df['Col1'][i],row_val_format_header)
@@ -3469,6 +3682,96 @@ def ten_sched_1_v2(workbook, df, worksheet):
             row_write_val = row_write_val + 1
             worksheet.set_row(row_write_val,7.5)
             row_write_val = row_write_val + 1
+        elif df['Col3'][i] == 'VACANT':
+            if vacant_counter == 0:
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+            for j in range(17):
+                if j == 0:
+                    worksheet.write(row_write_val, 0, df['Col1'][i],format_vacant)
+                elif j == 1:
+                    worksheet.write(row_write_val, 1, df['Col2'][i],format_vacant)
+                elif j == 2:
+                    worksheet.write(row_write_val, 2, df['Col3'][i],format_vacant_2)
+                elif j == 4:
+                    try:
+                        val_44 = float(df['Col5'][i])
+                    except:
+                        val_44 = df['Col5'][i]
+                    worksheet.write(row_write_val, 4, val_44,format_vacant_2)
+                else:
+                    worksheet.write_blank(row_write_val, j, None, format_vacant)
+            row_write_val = row_write_val + 1
+            worksheet.set_row(row_write_val,7.5)
+            row_write_val = row_write_val + 1
+            vacant_counter += 1
+        elif df['BOX'][i] == 1:
+            #print('hey')
+            worksheet.set_row(row_write_val-1,14.5)
+            if df['Col1'][i] == 'Occupancy Summary':
+                worksheet.write_string(row_write_val, 0, 'Occupancy Summary',rent_step_header_3)
+                worksheet.write_blank(row_write_val, 1, None, rent_step_header_1)
+                worksheet.write_string(row_write_val, 2, 'Area',box_title_2)
+                worksheet.write_string(row_write_val, 3, 'Percentage',box_title_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Occupied Area':
+                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Vacant Area':
+                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total': #box_total_1
+                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
+                worksheet.write_blank(row_write_val, 1, None, box_total_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
+                row_write_val = row_write_val + 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total Occupied Area':
+                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Grand Total':
+                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
+                worksheet.write_blank(row_write_val, 1, None, box_total_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
+                row_write_val = row_write_val + 1
+                worksheet.set_row(row_write_val,7.5)
+                row_write_val = row_write_val + 1
+            elif df['Col1'][i] == 'Total Vacant Area':
+                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
+                worksheet.write_blank(row_write_val, 1, None, box_base_1)
+                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
+                try:
+                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
+                except:
+                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
+                row_write_val = row_write_val + 1
         elif df['rent_step_header'][i] == 1:
             worksheet.write_string(row_write_val, 1, df['Col2'][i],rent_step_header_1)
             worksheet.write_string(row_write_val, 2, df['Col3'][i],rent_step_header_2)
@@ -3557,79 +3860,6 @@ def ten_sched_1_v2(workbook, df, worksheet):
                 except:
                     worksheet.write_blank(row_write_val, 14, None,rent_step_header_2)
             row_write_val = row_write_val + 1
-        elif df['BOX'][i] == 1:
-            worksheet.set_row(row_write_val-1,14.5)
-            if df['Col1'][i] == 'Occupancy Summary':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Occupancy Summary',rent_step_header_3)
-                worksheet.write_blank(row_write_val, 1, None, rent_step_header_1)
-                worksheet.write_string(row_write_val, 2, 'Area',box_title_2)
-                worksheet.write_string(row_write_val, 3, 'Percentage',box_title_2)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Occupied Area':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
-                worksheet.write_blank(row_write_val, 1, None, box_base_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Vacant Area':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
-                worksheet.write_blank(row_write_val, 1, None, box_base_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Total': #box_total_1
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
-                worksheet.write_blank(row_write_val, 1, None, box_total_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
-                row_write_val = row_write_val + 1
-                worksheet.set_row(row_write_val,7.5)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Total Occupied Area':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Occupied Area',box_base_3)
-                worksheet.write_blank(row_write_val, 1, None, box_base_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Grand Total':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Total',box_total_1)
-                worksheet.write_blank(row_write_val, 1, None, box_total_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_total_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_total_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_total_2)
-                row_write_val = row_write_val + 1
-                worksheet.set_row(row_write_val,7.5)
-                row_write_val = row_write_val + 1
-            elif df['Col1'][i] == 'Total Vacant Area':
-                #print('bump')
-                worksheet.write_string(row_write_val, 0, 'Vacant Area',box_base_3)
-                worksheet.write_blank(row_write_val, 1, None, box_base_1)
-                worksheet.write_number(row_write_val, 2, df['Col3'][i],box_base_1)
-                try:
-                    worksheet.write_number(row_write_val, 3, df['Col4'][i]/100,box_base_2)
-                except:
-                    worksheet.write_number(row_write_val, 3, 0,box_base_2)
-                row_write_val = row_write_val + 1
         elif df['rent_step_base'][i] == 1:
             next_rent_base = 0
             try:
