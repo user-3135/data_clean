@@ -2272,9 +2272,9 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             Cash_Flow_1.set_row(row_write_val,7.5)
             row_write_val = row_write_val + 1
             Cash_Flow_1.write_string(row_write_val, 0, cash_flow_1_df_end_of_page['Col1'][i],cf_header_format_7)
-            Cash_Flow_1.write_blank(row_write_val, 0, '',cf_header_format_7)
-            Cash_Flow_1.write_number(row_write_val, 1, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_3) #cf_header_
-            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_3)
+            Cash_Flow_1.write_blank(row_write_val, 1, '',cf_header_format_7)
+            Cash_Flow_1.write_number(row_write_val, 2, cash_flow_1_df_end_of_page['Col2'][i],cf_header_format_3) #cf_header_
+            Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_3)
             row_write_val = row_write_val + 1
             Cash_Flow_1.merge_range(row_write_val, 0, row_write_val, 2, '', header_format_2)
             Cash_Flow_1.set_row(row_write_val,7.5)
