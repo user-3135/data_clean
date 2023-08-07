@@ -2295,7 +2295,7 @@ def create_xl_cf_v2(workbook, cash_flow_1_df, Cash_Flow_1):
             Cash_Flow_1.write_number(row_write_val, 3, cash_flow_1_df_end_of_page['Col4'][i],cf_header_format_5)
             row_write_val = row_write_val + 1
     column_width_list = [
-        [71, 0, 0, Cash_Flow_1] ## cashflow
+        [45, 0, 0, Cash_Flow_1] ## cashflow
         ,[20, 1, 4, Cash_Flow_1] ## cashflow
     ]
     for i in column_width_list:
