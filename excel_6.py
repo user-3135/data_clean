@@ -4656,6 +4656,13 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                                     , 'align':'left'
                                     , 'num_format':4
                                     })
+    data_format_1_col_l = workbook.add_format({'font_color': black_color
+                                    , 'font_name': 'Century Gothic'
+                                    , 'font_size':10
+                                    , 'align':'left'
+                                    , 'num_format':4
+                                    , 'text_wrap':True
+                                    })
     data_format_1_center = workbook.add_format({'font_color': black_color
                                     , 'font_name': 'Century Gothic'
                                     , 'font_size':10
@@ -4767,13 +4774,13 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                 except:
                     worksheet.write_blank(row_write_val, 10, None,data_format_1)
                 try:
-                    worksheet.write(row_write_val, 11, df['Col12'][i],data_format_1)
+                    worksheet.write(row_write_val, 11, df['Col12'][i],data_format_1_col_l)
                 except:
-                    worksheet.write_blank(row_write_val, 11, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 11, None,data_format_1_col_l)
                 try:
-                    worksheet.write(row_write_val, 12, df['Col13'][i],data_format_1)
+                    worksheet.write(row_write_val, 12, df['Col13'][i],data_format_1_col_l)
                 except:
-                    worksheet.write_blank(row_write_val, 12, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 12, None,data_format_1_col_l)
                 try:
                     worksheet.write(row_write_val, 13, df['Col14'][i],data_format_1_notes)
                 except:
@@ -4806,13 +4813,13 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
                 except:
                     worksheet.write_blank(row_write_val, 10, None,data_format_1)
                 try:
-                    worksheet.write(row_write_val, 11, df['Col12'][i],data_format_1)
+                    worksheet.write(row_write_val, 11, df['Col12'][i],data_format_1_col_l)
                 except:
-                    worksheet.write_blank(row_write_val, 11, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 11, None,data_format_1_col_l)
                 try:
-                    worksheet.write(row_write_val, 12, df['Col13'][i],data_format_1)
+                    worksheet.write(row_write_val, 12, df['Col13'][i],data_format_1_col_l)
                 except:
-                    worksheet.write_blank(row_write_val, 12, None,data_format_1)
+                    worksheet.write_blank(row_write_val, 12, None,data_format_1_col_l)
                 try:
                     worksheet.write(row_write_val, 13, df['Col14'][i],data_format_1_notes)
                 except:
@@ -4858,6 +4865,7 @@ def JE_REGISTER_SHEET(workbook, df, worksheet):
     total_pages = max(math.ceil(row_write_val/50), 1)
     worksheet.fit_to_pages(1, total_pages)
     return df
+# ------------------------------------------------------------------ JE_Register END
 # ----------------------------------------------------------------- new stuff ap_detail_sheet_def_2
 def ap_detail_sheet_def_2(workbook, df, worksheet):
     yellow_color = '#b4992d'
