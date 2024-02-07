@@ -6139,17 +6139,50 @@ def mnth_gl_sheet(workbook, df, worksheet): ##mnth_gl_sheet
             row_write_val = row_write_val + 1
         else:
             try:
-                worksheet.write(row_write_val, 0, df['Col1'][i],data_format_1)
-                worksheet.write(row_write_val, 1, df['Col2'][i],data_format_1)
-                worksheet.write(row_write_val, 2, df['Col3'][i],data_format_3)
-                worksheet.write(row_write_val, 3, df['Col4'][i],data_format_4)
-                worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1)
-                worksheet.write(row_write_val, 5, df['Col6'][i],data_format_1)
-                worksheet.write(row_write_val, 6, df['Col7'][i],data_format_3)
-                worksheet.write(row_write_val, 7, df['Col8'][i],data_format_2)
-                worksheet.write(row_write_val, 8, df['Col9'][i],data_format_2)
-                worksheet.write(row_write_val, 9, df['Col10'][i],data_format_2)
-                worksheet.write(row_write_val, 10, df['Col11'][i],data_format_1)
+                try:
+                    worksheet.write(row_write_val, 0, df['Col1'][i],data_format_1)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 1, df['Col2'][i],data_format_1)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 2, df['Col3'][i],data_format_3)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 3, df['Col4'][i],data_format_4)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 4, df['Col5'][i],data_format_1_wrap)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 5, df['Col6'][i],data_format_1)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 6, df['Col7'][i],data_format_3)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 7, df['Col8'][i],data_format_2)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 8, df['Col9'][i],data_format_2)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 9, df['Col10'][i],data_format_2)
+                except:
+                    pass
+                try:
+                    worksheet.write(row_write_val, 10, df['Col11'][i],data_format_1_wrap)
+                except:
+                    pass
                 row_write_val += 1
             except:
                 pass
